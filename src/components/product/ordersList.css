@@ -1,0 +1,80 @@
+:root {
+  --color-black: #000;
+  --color-white: #fff;
+  --color-orange: #F94E30;
+  --color-light-orange: #FF6433;
+  --color-light-gray: #F2F2F2;
+  --color-light: #F4F4F4;
+  --color-whitesmoke: #F5F5F5;
+  --color-dark: #212529;
+  --color-danger: #DC3545;
+  --color-gray: #ddd;
+  --font-family-manrope: 'Manrope', sans-serif;
+  --font-family-poppins: 'Poppins', sans-serif;
+  --transition-ease: all 300ms ease-in-out;
+}
+
+.vendor-orders {
+  direction: rtl;
+  background: rgb(255, 255, 255) !important;
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.vendor-orders::-webkit-scrollbar {
+  display: none;
+}
+
+.vendor-orders .filter-order {
+  display: flex;
+  gap: 5px;
+  align-items: start;
+  justify-content: center;
+  border: 1px solid var(--color-gray);
+  height: 100%;
+  flex-wrap: wrap;
+  min-height: 20px;
+  margin-bottom: 20px;
+  background-color: #f5f5f5;
+  border: 1px solid #e3e3e3;
+  border-radius: 3px;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+}
+
+.vendor-orders .filter-order div {
+  flex-basis: 48%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  padding: 15px 20px;
+}
+
+@media (max-width:425px) {
+  .vendor-orders .filter-order div {
+    flex-basis: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    padding: 15px 20px;
+  }
+}
+
+.vendor-orders .filter-order div label {
+  flex-basis: 30%;
+  font-size: 12px;
+  font-weight: normal;
+  color: #666;
+}
+
+.vendor-orders .filter-order div input {
+  flex-basis: 70%;
+  text-align: center;
+  outline: none;
+  padding: 5px;
+  border: 2px solid var(--color-gray);
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}

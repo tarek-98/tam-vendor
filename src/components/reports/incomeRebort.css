@@ -1,0 +1,23 @@
+.income-report {
+  direction: rtl;
+}
+
+.income-report .info-icon-re {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #999;
+  margin-right: 5px;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  cursor: help;
+}
+
+.income-report .info-icon-re svg {
+  font-size: 10px;
+}

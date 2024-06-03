@@ -1,0 +1,221 @@
+:root {
+  --color-black: #000;
+  --color-white: #fff;
+  --color-orange: #F94E30;
+  --color-light-orange: #FF6433;
+  --color-light-gray: #F2F2F2;
+  --color-light: #F4F4F4;
+  --color-whitesmoke: #F5F5F5;
+  --color-dark: #212529;
+  --color-danger: #DC3545;
+  --color-gray: #929292;
+  --font-family-manrope: 'Manrope', sans-serif;
+  --font-family-poppins: 'Poppins', sans-serif;
+  --transition-ease: all 300ms ease-in-out;
+}
+
+.user-profile {
+  display: flex;
+  flex-direction: column;
+  background: rgb(255, 255, 255) !important;
+  height: 100%;
+  padding: 10px;
+  overflow-y: scroll;
+}
+
+/* @media (min-width:768px) {
+  .user-profile {
+    width: 50%;
+    margin-left: auto;
+    margin-right: 10px;
+  }
+} */
+
+.user-profile .logo {
+  height: 70px;
+}
+
+.user-profile .user-content .sign-up {
+  direction: ltr;
+  display: flex;
+  justify-content: space-between;
+}
+
+.user-profile .user-content .sign-up .close svg {
+  color: var(--color-orange);
+  font-size: 25px;
+}
+
+.user-profile .user-content .sign-up .user-icon {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-profile .user-content .sign-up .user-icon img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  border: 1px solid #ddd;
+}
+
+
+.user-profile .user-content .sign-up .user-icon .user-name {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-profile .user-content .sign-up .user-icon .user-name span {
+  display: flex;
+  color: black;
+}
+
+.user-profile .user-content .sign-up .user-icon svg {
+  color: black;
+  font-size: 25px;
+}
+
+.user-profile .user-options {
+  direction: rtl;
+}
+
+.user-profile .user-options .user-option-item {
+  border: 1px solid var(--color-gray);
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+  margin-bottom: 20px;
+}
+
+.user-profile .user-options .user-option-item .user-item {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  color: black;
+}
+
+.user-profile .user-options .user-option-item .user-item svg {
+  font-size: 23px;
+}
+
+/*editPage*/
+.user-profile .form {
+  direction: rtl;
+}
+
+@media (min-width:768px) {
+  .user-profile .back {
+    display: none;
+  }
+
+  .user-profile .form-edit-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .user-profile .form-edit-info form {
+    padding-top: 20px;
+    width: 50%;
+  }
+}
+
+.user-profile .user-address {
+  direction: rtl;
+}
+
+/*add*/
+.add-address-hide {
+  display: none;
+}
+
+.old-address-hide {
+  display: none;
+}
+
+.old-address {}
+
+.old-address .main-title {
+  padding: 5px;
+  background-color: var(--color-light-gray)
+}
+
+.old-address .main-title .add {
+  background-color: #3e72f7;
+  color: white;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  width: fit-content;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+.orders {
+  position: relative;
+}
+
+.orders .orderStatue {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.orders .orderStatue span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  padding: 5px;
+  font-weight: bold;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  margin-left: 15px;
+  opacity: 0.6;
+}
+
+.orders .orderStatue .complete-order {
+  background-color: green;
+  color: white;
+}
+
+.orders .orderStatue .pending-order {
+  background-color: yellow;
+  color: black;
+}
+
+.orders .orderStatue .reject-order {
+  background-color: red;
+  color: white;
+}
+
+.user-profile::-webkit-scrollbar {
+  display: none;
+}
+
+@media (min-width:768px) {
+
+  .user-profile .logo {
+    display: none;
+  }
+
+}

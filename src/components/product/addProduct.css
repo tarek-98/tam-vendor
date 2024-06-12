@@ -75,7 +75,7 @@
 }
 
 .step-content-item {
-  height: 500px;
+  height: auto;
   width: 100%;
 }
 
@@ -97,6 +97,16 @@
 .video-label video {
   width: fit-content;
   height: 300px;
+}
+
+.alert-weight {
+  text-align: right;
+  width: 100%;
+}
+
+.alert-weight ol {
+  direction: rtl;
+  width: 95%;
 }
 
 .product-details input,
@@ -314,4 +324,17 @@ td {
   .filter-table {
     width: 75%;
   }
+}
+
+.prod-type select {
+  text-align: center;
+  outline: none;
+  padding: 5px;
+  border: 2px solid var(--color-gray);
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  width: 100%;
 }

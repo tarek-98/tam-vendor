@@ -28,8 +28,8 @@ function Footer() {
               <div className="tab-text">الرئيسية</div>
             </Link>
           </div>
-          <div className="tab-container pop">
-            <Link to="/" className="tab-link">
+          <div className="tab-container pop foot-pc">
+            <Link to="/profile/notification" className="tab-link">
               <MdOutlineMoveToInbox className="tab-icon" />
               <span
                 className={carts.length <= 0 ? "cart-num-hide" : "cart-num"}
@@ -39,7 +39,7 @@ function Footer() {
               <div className="tab-text"> الوارد</div>
             </Link>
           </div>
-          <div className="tab-container">
+          <div className="tab-container foot-pc">
             <Link to="/profile/addProduct" className="tab-link">
               <AiFillPlusSquare className="tab-icon" />
               <div className="tab-text">اضافة منتج</div>

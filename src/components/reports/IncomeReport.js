@@ -1,60 +1,89 @@
-import React from "react";
-import { Table } from "react-bootstrap";
+import React, { Fragment, useEffect, useState } from "react";
 import "./incomeRebort.css";
-import { FaInfo } from "react-icons/fa6";
+import logo1 from "../../assets/images/logo1.png";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchPaymentsMethods,
+  togglePaymentsMethods,
+} from "../../store/tabbySlice";
 
 function IncomeReport() {
+  const dispatch = useDispatch();
+  const payments = useSelector((state) => state.payments.methods);
+  useEffect(() => {
+    dispatch(fetchPaymentsMethods());
+  }, []);
+  const enabledPayment = payments.filter((method) => method.enabled);
+
   return (
     <div className="user-profile">
       <div className="income-report">
         <div className="container">
           <div className="table">
-            <div className="main-title mb-4">
-              <h3>تقارير الدخل</h3>
-            </div>
-            <Table striped bordered hover responsive>
-              <thead>
-                <tr>
-                  <th>كود الطلب</th>
-                  <th>تاريخ الطلب</th>
-                  <th>اجمالي الطلب</th>
-                  <th className="d-flex align-items-center">
-                    <span>نسبة تمقل</span>
-                    <span className="info-icon-re popup-container">
-                      <FaInfo />
+            <div className="row">
+              <div className="col">
+                <div className="income-report-content text-center">
+                  <div className="income-logo">
+                    <img src={logo1} alt="" />
+                  </div>
+                  <div className="ve-name mb-4">
+                    <h4>ahmed</h4>
+                  </div>
+                  <div className="main-title mb-4">
+                    <h3>تقارير الدخل</h3>
+                  </div>
+                  <div className="total-income d-flex justify-content-between align-items-center gap-4">
+                    <span>
+                      اجمالي المبيعات
+                      <br />
+                      <span className="income-tax text-black-50">
+                        (شامل الضريبة)
+                      </span>
                     </span>
-                  </th>
-                  <th>مبلغ البائع</th>
-                  <th>الحالة</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>7854</td>
-                  <td>12/06/2024</td>
-                  <td>1200 ر.س</td>
-                  <td>{1200 * 0.15}</td>
-                  <td>{1200 - 1200 * 0.15}</td>
-                  <td>تم الدفع</td>
-                </tr>
-                <tr>
-                  <td>2525</td>
-                  <td>12/06/2024</td>
-                  <td>2200 ر.س</td>
-                  <td>{2200 * 0.15}</td>
-                  <td>{2200 - 2200 * 0.15}</td>
-                  <td>تم الدفع</td>
-                </tr>
-                <tr>
-                  <td>7478</td>
-                  <td>12/06/2024</td>
-                  <td>1700 ر.س</td>
-                  <td>{1700 * 0.15}</td>
-                  <td>{1700 - 1700 * 0.15}</td>
-                  <td>باقي</td>
-                </tr>
-              </tbody>
-            </Table>
+                    <span>115 ر.س</span>
+                  </div>
+                  <hr />
+                  <div className="income-details mb-4">
+                    <h5>التفاصيل</h5>
+                  </div>
+                  <div className="income-details-items">
+                    <div>
+                      <span>المبيعات</span>
+                      <span>100</span>
+                    </div>
+                    <div>
+                      <span>ضريبة القيمة المضافة (15%)</span>
+                      <span>15</span>
+                    </div>
+                    <div>
+                      <span>عمولة تمقل</span>
+                      <span>20</span>
+                    </div>
+                    <div>
+                      <span>مستحقات تابي و تمارا</span>
+                      {enabledPayment.length >= 1 ? (
+                        <span>7.0</span>
+                      ) : (
+                        <span>0.0</span>
+                      )}
+                    </div>
+                    <div>
+                      <span>المعلق</span>
+                      <span>0.0</span>
+                    </div>
+                    <div>
+                      <span>
+                        المحول للتاجر
+                        <span className="after-rival text-black-50 me-2">
+                          بعد خصم المستحقات
+                        </span>
+                      </span>
+                      <span>80</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

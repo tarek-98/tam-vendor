@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
 import "./ordersList.css";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAsyncProducts, getAllProducts } from "../../store/productSlice";
-import { Table } from "react-bootstrap";
-import { fetchOrders } from "../../store/ordersSlice";
+import { fetchOrders, getAllOrders } from "../../store/ordersSlice";
+import logo from "../../assets/images/logo1.png";
+import { Link } from "react-router-dom";
 
 function OrdersList() {
-  const orders = useSelector((state) => state.orders);
+  const orders = useSelector(getAllOrders);
   const [filteredOrders, setFilteredOrders] = useState([]);
   const [filters, setFilters] = useState({
     name: "",
     id: "",
-    statu: "",
-    date: "",
+    shipping_status: "",
+    order_date: "",
   });
 
   const dispatch = useDispatch();
@@ -23,10 +23,13 @@ function OrdersList() {
   useEffect(() => {
     const filtered = orders.filter(
       (order) =>
-        order.name.toLowerCase().includes(filters.name.toLowerCase()) &&
+        order.user.name.toLowerCase().includes(filters.name.toLowerCase()) &&
         (filters.id === "" || order.id.toString().includes(filters.id)) &&
-        order.statu.toLowerCase().includes(filters.statu.toLowerCase()) &&
-        (filters.date === "" || order.date.toLowerCase().includes(filters.date))
+        order.shipping_status
+          .toLowerCase()
+          .includes(filters.shipping_status.toLowerCase()) &&
+        (filters.order_date === "" ||
+          order.order_date.toLowerCase().includes(filters.order_date))
     );
     setFilteredOrders(filtered);
   }, [filters, orders]);
@@ -69,7 +72,7 @@ function OrdersList() {
                 <label htmlFor="">حالة الطلب</label>
                 <input
                   type="text"
-                  name="statu"
+                  name="shipping_status"
                   placeholder="حالة الطلب"
                   value={filters.statu}
                   onChange={handleFilterChange}
@@ -79,7 +82,7 @@ function OrdersList() {
                 <label htmlFor="">تاريخ الاضافة</label>
                 <input
                   type="date"
-                  name="date"
+                  name="order_date"
                   placeholder="تاريخ الاضافة"
                   value={filters.date}
                   onChange={handleFilterChange}
@@ -88,34 +91,48 @@ function OrdersList() {
             </div>
           </div>
           <div className="col-lg-12">
-            <div className="orders-table">
-              <h3 className="mb-3">قائمة الطلبات</h3>
-              <Table striped bordered hover responsive>
-                <thead>
-                  <tr>
-                    <th>رقم الطلب</th>
-                    <th>اسم العميل</th>
-                    <th>حالة الطلب</th>
-                    <th>مبلغ الطلب</th>
-                    <th>تاريخ الاضافة</th>
-                    <th>تحرير</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {filteredOrders.map((order, idx) => {
-                    return (
-                      <tr key={order.id}>
-                        <td>{order.id}</td>
-                        <td>{order.name}</td>
-                        <td>{order.statu}</td>
-                        <td>{order.price} ر.س</td>
-                        <td>{order.date}</td>
-                        <td>استعراض</td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </Table>
+            <div className="orders-table pt-2 pb-3">
+              <h4 className="mb-5 p-3">
+                قائمة الطلبات ( <span>{filteredOrders.length} طلب )</span>
+              </h4>
+              {filteredOrders.map((order) => {
+                return (
+                  <Link
+                    key={order.id}
+                    className="mb-4 order-item ps-3 pe-3 pt-2 pb-2"
+                    to={`/profile/orderslist/${order.id}`}
+                  >
+                    <div className="row">
+                      <div className="col-lg-12 mb-3">
+                        <div className="row">
+                          <div className="col-8 col-sm-4">
+                            <div className="d-flex align-items-center">
+                              <div className="logo ms-4">
+                                <img src={logo} alt="" srcset="" />
+                              </div>
+                              <div className="order-info">
+                                <div className="name-user-order mb-2">
+                                  <span>{order.user.name}</span>
+                                </div>
+                                <div className="num-order d-flex gap-2">
+                                  <span className="fw-bold">{order.id}#</span>
+                                  <span>{order.shipping_status}</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="col-2 col-sm-4 d-flex align-items-center justify-content-center">
+                            <span>{order.total_amount} ر.س</span>
+                          </div>
+                          <div className="col-2 col-sm-4 d-flex align-items-center justify-content-center">
+                            <span>{order.order_date}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </div>

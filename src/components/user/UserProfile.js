@@ -1,7 +1,14 @@
 import React, { useEffect } from "react";
 import "./userProfile.css";
 import { Link } from "react-router-dom";
-import { FaCarAlt, FaCartPlus, FaShoppingCart } from "react-icons/fa";
+import {
+  FaCarAlt,
+  FaCartPlus,
+  FaRegEdit,
+  FaShoppingCart,
+  FaWindowRestore,
+} from "react-icons/fa";
+import { CiCreditCard1 } from "react-icons/ci";
 import { TbReportSearch } from "react-icons/tb";
 import { IoCloudUploadSharp } from "react-icons/io5";
 import { IoIosGift, IoMdCloseCircle } from "react-icons/io";
@@ -10,6 +17,7 @@ import { FaLocationDot } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
 import logo1 from "../../assets/images/logo1.png";
 import { fetchUsers } from "../../store/usersSlice";
+import { MdOutlineMoveToInbox } from "react-icons/md";
 
 function UserProfile() {
   const users = useSelector((state) => state.users);
@@ -43,6 +51,16 @@ function UserProfile() {
                 <div className="user-ph text-center mb-2">
                   <span className="text-dark">{users.phone}</span>
                 </div>
+                <div className="edit-logo d-flex gap-4 text-center">
+                  <Link>
+                    <FaRegEdit className="text-dark me-1" />
+                    تعديل البيانات
+                  </Link>
+                  <Link to="/profile/editlogo">
+                    <FaRegEdit className="text-dark me-1" />
+                    تغيير اللوجو
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
@@ -68,18 +86,6 @@ function UserProfile() {
                 <span>قائمة المنتجات</span>
               </Link>
             </div>
-            <div className="user-option-item">
-              <Link className="user-item d-flex w-100">
-                <TbReportSearch />
-                <span>تقارير المبيعات</span>
-              </Link>
-            </div>
-            <div className="user-option-item">
-              <Link className="user-item d-flex w-100" to="/profile/incomereport">
-                <TbReportSearch />
-                <span>تقارير الدخل</span>
-              </Link>
-            </div>
             <div className="user-option-item orders">
               <Link to="/profile/orderslist" className="user-item d-flex w-100">
                 <FaLocationDot />
@@ -89,6 +95,21 @@ function UserProfile() {
                   <span className="reject-order">6</span>
                 </div>
                 <span>الطلبات</span>
+              </Link>
+            </div>
+            <div className="user-option-item">
+              <Link className="user-item d-flex w-100">
+                <TbReportSearch />
+                <span>تقارير المبيعات</span>
+              </Link>
+            </div>
+            <div className="user-option-item">
+              <Link
+                className="user-item d-flex w-100"
+                to="/profile/incomereport"
+              >
+                <TbReportSearch />
+                <span>تقارير الدخل</span>
               </Link>
             </div>
             <div className="user-option-item">
@@ -104,10 +125,43 @@ function UserProfile() {
               </Link>
             </div>
             <div className="user-option-item">
+              <Link className="user-item d-flex w-100" to="/profile/payments">
+                <CiCreditCard1 />
+                <span>خدمات تابي و تمارا </span>
+              </Link>
+            </div>
+            <div className="user-option-item inbox-pc">
+              <Link
+                className="user-item d-flex w-100"
+                to="/profile/notification"
+              >
+                <MdOutlineMoveToInbox className="tab-icon" />
+                <span>صندوق الوارد</span>
+              </Link>
+            </div>
+            <div className="user-option-item">
               <Link className="user-item d-flex w-100" to="">
                 <IoCloudUploadSharp />
                 <span className="col-rd text-danger">NEW</span>
                 <span>طلب اعلان خاص</span>
+              </Link>
+            </div>
+            <div className="user-option-item item-pc">
+              <Link className="user-item d-flex w-100">
+                <FaWindowRestore />
+                <span>سياسة الشحن و الاسترجاع</span>
+              </Link>
+            </div>
+            <div className="user-option-item item-pc">
+              <Link className="user-item d-flex w-100">
+                <FaWindowRestore />
+                <span>الشروط و الاحكام و سياسة الخصوصية</span>
+              </Link>
+            </div>
+            <div className="user-option-item item-pc">
+              <Link className="user-item d-flex w-100">
+                <span>TMGGL</span>
+                <span>عن تمقل</span>
               </Link>
             </div>
           </div>

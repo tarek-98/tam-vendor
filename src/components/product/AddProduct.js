@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import "./addProduct.css";
 import { FaCloudUploadAlt, FaStarOfLife } from "react-icons/fa";
 import { IoIosCheckmark } from "react-icons/io";
+import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 function AddProduct() {
   const [currentStep, setCurrentStep] = useState(1);
@@ -21,17 +23,28 @@ function AddProduct() {
     }
   };
 
+  const handleChangeCommission = (event) => {
+    setCommission(event.target.value);
+  };
   const hundleSubmit = (e) => {
     e.preventDefault();
   };
   const steps = ["1", "2", "3", "4", "5"];
   const productType = [
+    { name: "اختر ", commission: 0 },
     { name: "ملابس", commission: 10 },
     { name: "الكترونيات", commission: 20 },
     { name: "اجهزة كهربائية", commission: 5 },
-    { name: "العاب", commission: 14 },
+    { name: "العاب", commission: 15 },
     { name: "ملابس رياضية", commission: 25 },
   ];
+
+  function handleAlert() {
+    Swal.fire({
+      html: "<div class=alert-weight><p>الوزن الحجمي في الشحن وطريقة حسابه</p><p>ما هو الوزن الحجمي للطرد؟ </p><p>الوزن الحجمي: هو وزن الطرد الذي يحسب من حجمه أو أبعاده. إنها المساحة التي يشغلها الصندوق من حيث كثافته.</p><p>طريقة حساب الوزن الحجمي للطرد:</p><ol><li> قياس أبعاد الشحنة/الطرد بـالـ (سم).</li><li>حجم الشحنة=الطول × العرض × الإرتفاع</li><li>قسم حجم الشحنة على العامل الحجمي.</li></ol><p> العامل الحجمي للشحن البري= 6000</p></div>",
+      icon: "info",
+    });
+  }
 
   return (
     <div className="user-profile">
@@ -132,6 +145,7 @@ function AddProduct() {
                           <input
                             type="text"
                             id="product-name"
+                            placeholder="اكتب اسم المنتج"
                             className=""
                             required
                           />
@@ -143,6 +157,7 @@ function AddProduct() {
                           <textarea
                             name=""
                             id="product-description"
+                            placeholder="اكتب وصف المنتج"
                             className=""
                             required
                           ></textarea>
@@ -157,10 +172,37 @@ function AddProduct() {
                           <input
                             type="text"
                             id="product-hashtag"
+                            placeholder="اكتب كلمات الهاشتاق"
                             className=""
                             required
                           />
                           <span>استخدم علامات # - ولا تستخدم المسافة</span>
+                        </div>
+                        <div className="d-flex flex-column justify-content-center align-items-start w-100">
+                          <label htmlFor="product-hashtag" className="mb-2">
+                            <span className="required ms-2">
+                              <FaStarOfLife />
+                            </span>
+                            وزن المنتج
+                          </label>
+                          <input
+                            type="text"
+                            id="product-hashtag"
+                            placeholder="اكتب وزن المنتج"
+                            className=""
+                            required
+                          />
+                          <span className="text-black-50 d-flex">
+                            أدخل الوزن الفعلي للمنتج ليتم معالجته بشكل صحيح من
+                            قبل شركة الشحن، وفي حال كانت منتجاتك ذات حجم كبير
+                            الرجاء الانتباه للوزن الحجمي
+                            <Link
+                              className="ms-2 me-2"
+                              onClick={() => handleAlert()}
+                            >
+                              تفاصيل
+                            </Link>
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -282,34 +324,28 @@ function AddProduct() {
                               اختر نوع المنتج
                             </label>
                             <div>
-                              <div className="mb-3">
-                                {productType.map((typ) => {
-                                  return (
-                                    <div className="d-flex flex-column gap-3 justify-content-start align-items-start">
-                                      <div className="d-flex flex-row-reverse gap-2">
-                                        <label htmlFor={`option${typ.name}`}>
+                              <div className="mb-3 prod-type">
+                                <select
+                                  name=""
+                                  id=""
+                                  onChange={handleChangeCommission}
+                                >
+                                  {productType.map((typ) => {
+                                    return (
+                                      <Fragment>
+                                        <option value={typ.commission}>
                                           {typ.name}
-                                        </label>
-                                        <input
-                                          type="radio"
-                                          name="option"
-                                          id={`option${typ.name}`}
-                                          onChange={() =>
-                                            setCommission(typ.commission)
-                                          }
-                                        />
-                                      </div>
-                                    </div>
-                                  );
-                                })}
+                                        </option>
+                                      </Fragment>
+                                    );
+                                  })}
+                                </select>
                               </div>
                               <div className="d-flex flex-column justify-content-center align-items-start w-100">
-                                <p className="fw-bold">
-                                  السعر للتاجر بعد خصم العموله
-                                </p>
+                                <p className="fw-bold">عمولة تمقل</p>
                                 <p className="priceCommis">
-                                  {productPrice -
-                                    productPrice * (commission / 100)}
+                                  {productPrice.toFixed(2) *
+                                    (commission / 100).toFixed(2)}
                                 </p>
                               </div>
                             </div>
@@ -317,7 +353,9 @@ function AddProduct() {
                         </div>
                         <div className="product-vat">
                           <div className="d-flex flex-column justify-content-center align-items-start w-100">
-                            <p className="fw-bold">السعر شامل الضريبة</p>
+                            <p className="fw-bold">
+                              السعر الظاهر للعميل (شامل الضريبة)
+                            </p>
                             <p className="priceVat">
                               {productPrice * (15 / 100) + productPrice}
                             </p>

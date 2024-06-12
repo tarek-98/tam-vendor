@@ -71,6 +71,22 @@
   align-items: center;
 }
 
+.user-content .user-icon .edit-logo a {
+  padding: 5px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  font-size: 12px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+}
+
 .user-profile .user-content .sign-up .user-icon .user-name span {
   display: flex;
   color: black;
@@ -79,6 +95,10 @@
 .user-profile .user-content .sign-up .user-icon svg {
   color: black;
   font-size: 25px;
+}
+
+.user-profile .user-content .user-icon .edit-logo svg {
+  font-size: 11px !important;
 }
 
 .user-profile .user-options {
@@ -94,6 +114,7 @@
   -o-border-radius: 20px;
   margin-bottom: 20px;
 }
+
 
 .user-profile .user-options .user-option-item .user-item {
   display: flex;
@@ -128,6 +149,29 @@
     padding-top: 20px;
     width: 50%;
   }
+
+  .user-profile .user-options {
+    direction: rtl;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .user-profile .user-options .user-option-item {
+    flex-basis: calc(100% / 3 - 5px);
+    border: 1px solid var(--color-gray);
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    margin-bottom: 20px;
+  }
+
+  .user-profile .item-pc {
+    display: none;
+  }
+
 }
 
 .user-profile .user-address {
@@ -218,4 +262,11 @@
     display: none;
   }
 
+}
+
+@media (max-width:425px) {
+
+  .user-profile .user-options .user-option-item.inbox-pc {
+    display: none;
+  }
 }

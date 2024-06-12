@@ -22,6 +22,7 @@ const CouponPage = () => {
     discount: "",
     startDate: "",
     endDate: "",
+    discountType: "",
   });
   const [editingCoupon, setEditingCoupon] = useState(null);
   const [editingValues, setEditingValues] = useState({
@@ -29,6 +30,7 @@ const CouponPage = () => {
     discount: "",
     startDate: "",
     endDate: "",
+    discountType: "",
   });
 
   useEffect(() => {
@@ -40,16 +42,27 @@ const CouponPage = () => {
       newCoupon.code &&
       newCoupon.discount &&
       newCoupon.startDate &&
-      newCoupon.endDate
+      newCoupon.endDate &&
+      newCoupon.discountType
     ) {
       dispatch(addCoupon(newCoupon));
-      setNewCoupon({ code: "", discount: "", startDate: "", endDate: "" });
+      setNewCoupon({
+        code: "",
+        discountType: "",
+        discount: "",
+        startDate: "",
+        endDate: "",
+      });
       toast.success("تمت اضافة الكوبون", {
         position: "top-left",
       });
     } else {
       if (newCoupon.code === "") {
         toast.error("الكود مطلوب", {
+          position: "top-left",
+        });
+      } else if (newCoupon.discountType === "") {
+        toast.error("النوع مطلوب", {
           position: "top-left",
         });
       } else if (newCoupon.discount === "") {
@@ -75,6 +88,7 @@ const CouponPage = () => {
       discount: coupon.discount,
       startDate: coupon.startDate,
       endDate: coupon.endDate,
+      discountType: coupon.discountType,
     });
   };
 
@@ -83,7 +97,8 @@ const CouponPage = () => {
       editingValues.code &&
       editingValues.discount &&
       editingValues.startDate &&
-      editingValues.endDate
+      editingValues.endDate &&
+      editingValues.discountType
     ) {
       dispatch(updateCoupon({ id: editingCoupon, ...editingValues }));
       setEditingCoupon(null);
@@ -129,6 +144,16 @@ const CouponPage = () => {
                 setNewCoupon({ ...newCoupon, code: e.target.value })
               }
             />
+            <select
+              value={newCoupon.discountType}
+              onChange={(e) =>
+                setNewCoupon({ ...newCoupon, discountType: e.target.value })
+              }
+            >
+              <option value="">اختر نوع الخصم</option>
+              <option value="percent">بالمائة</option>
+              <option value="flat">الريال</option>
+            </select>
             <Input
               type="text"
               placeholder="الخصم"
@@ -170,6 +195,19 @@ const CouponPage = () => {
                         })
                       }
                     />
+                    <select
+                      value={editingValues.discountType}
+                      onChange={(e) =>
+                        setEditingValues({
+                          ...editingValues,
+                          discountType: e.target.value,
+                        })
+                      }
+                    >
+                      <option value="">اختر نوع الخصم</option>
+                      <option value="percent">بالمائة</option>
+                      <option value="flat">الريال</option>
+                    </select>
                     <Input
                       type="text"
                       value={editingValues.discount}
@@ -208,7 +246,10 @@ const CouponPage = () => {
                 ) : (
                   <Fragment>
                     <CouponDetails>
-                      <strong>{coupon.code}</strong> - ر.س {coupon.discount}{" "}
+                      <strong>{coupon.code}</strong> -{" "}
+                      {coupon.discountType === "percent"
+                        ? `% ${coupon.discount}`
+                        : `ر.س ${coupon.discount}`}
                       <br />
                       <span>
                         {coupon.startDate} <br /> to {coupon.endDate}

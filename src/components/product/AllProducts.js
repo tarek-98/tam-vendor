@@ -5,6 +5,8 @@ import { fetchAsyncProducts, getAllProducts } from "../../store/productSlice";
 import { Button, Table } from "react-bootstrap";
 import DataTable from "react-data-table-component";
 import { MdDeleteForever, MdModeEdit } from "react-icons/md";
+import { MdOutlineSlideshow } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 function AllProducts() {
   const products = useSelector(getAllProducts);
@@ -58,7 +60,7 @@ function AllProducts() {
         <img
           src={`${img_url}/${row.images[0]}`}
           alt={row.name}
-          style={{ width: "150px", height: "100px", padding: "10px" }}
+          style={{ width: "100%", height: "100%", padding: "10px" }}
         />
       ),
       sortable: false,
@@ -88,6 +90,9 @@ function AllProducts() {
           <span className="del">
             <MdDeleteForever className="text-white fs-6" />
           </span>
+          <Link className="edit me-2">
+            <MdOutlineSlideshow className="text-black fs-6" />
+          </Link>
         </div>
       ),
       ignoreRowClick: true,

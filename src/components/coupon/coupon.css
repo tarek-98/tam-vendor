@@ -40,3 +40,14 @@
 .vendor-coupons button.del:hover {
   background-color: var(--color-orange) !important;
 }
+
+.vendor-coupons select {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  flex: 1;
+  min-width: 180px;
+  margin-right: 10px;
+}

@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "./slideOverlay.css";
-import { GoPlus } from "react-icons/go";
 import { useDispatch, useSelector } from "react-redux";
-import { FaCommentDots, FaHeart, FaShare } from "react-icons/fa";
-import { FaWhatsapp } from "react-icons/fa";
-import { RiChatForwardLine } from "react-icons/ri";
+import { FaCommentDots } from "react-icons/fa";
 import { HiMiniBars3 } from "react-icons/hi2";
-import { Link, useNavigate } from "react-router-dom";
-import { CiLink } from "react-icons/ci";
-import { fetchComments, getAllComments } from "../store/commentSlice";
+import { Link } from "react-router-dom";
+import { fetchComments } from "../store/commentSlice";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 
 function SlideOverlay({
@@ -23,7 +19,7 @@ function SlideOverlay({
   const dispatch = useDispatch();
   const [liked, setLiked] = useState(false);
   const [iconPlus, setIconPlus] = useState(true);
-  const comments = useSelector(getAllComments);
+  const comments = useSelector((state) => state.comments.comments);
 
   // Function to convert likes count to a number
   const parseLikesCount = (count) => {

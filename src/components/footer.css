@@ -105,6 +105,10 @@
     width: 100%;
   }
 
+  .footer-container .tab-container.foot-pc {
+    display: none;
+  }
+
   .footer-container .tab-container.pop {
     position: relative;
   }

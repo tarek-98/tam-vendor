@@ -18,6 +18,10 @@
   overflow: auto;
 }
 
+.search-home::-webkit-scrollbar {
+  display: none;
+}
+
 .search-home .search-container {
   display: flex;
   -webkit-box-align: center;
@@ -49,6 +53,7 @@
   flex-basis: 15%;
   color: var(--color-light-orange);
   cursor: pointer;
+  text-align: center;
 }
 
 .search-container .input-container {
@@ -280,4 +285,29 @@
 
 .filterItem-price .price-dir span {
   font-size: clamp(10px, 4vw, 16px);
+}
+
+@media (min-width:767px) {
+
+  .search-container,
+  .search-filter-item-container {
+    position: relative !important;
+  }
+
+  .result-container {
+    margin-top: 5px !important;
+  }
+
+  .search-filter-item-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: #EDEDEE;
+    direction: rtl;
+    position: fixed;
+    width: 100%;
+    z-index: 5000;
+
+  }
 }

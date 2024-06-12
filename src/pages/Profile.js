@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import "../components/login.css";
 import UserProfile from "../components/user/UserProfile";
 
-function Profile() {
+function Profile({ socket }) {
   return (
     <div className="log-home">
-      <UserProfile />
+      <UserProfile socket={socket} />
     </div>
   );
 }

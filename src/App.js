@@ -21,6 +21,10 @@ import AllProducts from "./components/product/AllProducts";
 import OrdersList from "./components/product/OrdersList";
 import CouponPage from "./components/coupon/CouponPage";
 import IncomeReport from "./components/reports/IncomeReport";
+import OrderInfo from "./components/product/OrderInfo";
+import EditLogo from "./components/user/EditLogo";
+import Notifications from "./components/notifications/Notifications";
+import Tabby from "./components/tabby/Tabby";
 
 function App() {
   return (
@@ -40,7 +44,13 @@ function App() {
                 <Route path="/search" element={<SearchPage />}></Route>
                 <Route path="/profile" element={<Profile />}></Route>
                 <Route path="/profile/shipping" element={<Shipping />}></Route>
+                <Route path="/profile/payments" element={<Tabby />}></Route>
+                <Route
+                  path="/profile/notification"
+                  element={<Notifications />}
+                ></Route>
                 <Route path="/profile/editInfo" element={<EditInfo />} />
+                <Route path="/profile/editlogo" element={<EditLogo />} />
                 <Route path="/profile/address" element={<UserAddress />} />
                 <Route path="/profile/address/add" element={<AddAddress />} />
                 <Route
@@ -50,6 +60,7 @@ function App() {
                 <Route path="/profile/addProduct" element={<AddProduct />} />
                 <Route path="/profile/productslist" element={<AllProducts />} />
                 <Route path="/profile/orderslist" element={<OrdersList />} />
+                <Route path="/profile/orderslist/:id" element={<OrderInfo />} />
                 <Route path="/profile/coupons" element={<CouponPage />} />
                 <Route
                   path="/profile/incomereport"

@@ -13,6 +13,8 @@ import shippingReducer from "./shippingSlice";
 import { loadState, saveState } from "../utils/localStorage";
 import ordersSlice from "./ordersSlice";
 import couponsSlice from "./couponsSlice";
+import notificationsReducer from "./notificationSlice";
+import tabbySlice from "./tabbySlice";
 
 const preloadedState = loadState();
 
@@ -31,6 +33,8 @@ const store = configureStore({
     orders: ordersSlice,
     coupons: couponsSlice,
     shipping: shippingReducer,
+    payments: tabbySlice,
+    notifications: notificationsReducer,
   },
   preloadedState,
 });

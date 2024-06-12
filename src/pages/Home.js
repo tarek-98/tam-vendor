@@ -1,18 +1,16 @@
 import React, { Fragment, useEffect, useRef, useState } from "react";
 import Navbar from "../components/Navbar";
 import Product from "../components/Product";
-import { FaVolumeHigh, FaVolumeXmark } from "react-icons/fa6";
-import { fetchComments, getAllComments } from "../store/commentSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { FaVolumeXmark } from "react-icons/fa6";
+import { useSelector } from "react-redux";
 import { IoIosCloseCircleOutline } from "react-icons/io";
-import CommentList from "../components/comments/CommentList";
-import CommentForm from "../components/comments/CommentForm";
+import Comments from "../components/comments/CommentList";
 
 function Home() {
   const [volume, setVolume] = useState(false);
   const [sound, setSound] = useState(true);
   const [comment, setComment] = useState(false);
-  const comments = useSelector(getAllComments);
+  const comments = useSelector((state) => state.comments.comments);
 
   return (
     <Fragment>
@@ -42,8 +40,7 @@ function Home() {
               )}
             </h2>
           </div>
-          <CommentList />
-          <CommentForm />
+          <Comments />
         </div>
       </div>
     </Fragment>

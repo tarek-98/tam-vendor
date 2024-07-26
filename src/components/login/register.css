@@ -1,0 +1,60 @@
+:root {
+  --color-black: #000;
+  --color-white: #fff;
+  --color-orange: #F94E30;
+  --color-light-orange: #FF6433;
+  --color-light-gray: #F2F2F2;
+  --color-light: #F4F4F4;
+  --color-whitesmoke: #F5F5F5;
+  --color-dark: #212529;
+  --color-danger: #DC3545;
+  --color-gray: #929292;
+  --font-family-manrope: 'Manrope', sans-serif;
+  --font-family-poppins: 'Poppins', sans-serif;
+  --transition-ease: all 300ms ease-in-out;
+}
+
+.register-main {
+  background: rgb(255, 255, 255) !important;
+  height: 100%;
+  padding: 10px 20px;
+  overflow-y: scroll;
+  text-align: right;
+  display: grid;
+}
+
+.register-main .container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 50%;
+}
+
+@media (max-width:768px) {
+  .register-main .container {
+    width: 100%;
+  }
+}
+
+.register-main::-webkit-scrollbar {
+  display: none;
+}
+
+.register-main .form-control {
+  text-align: right;
+  margin-bottom: 15px;
+}
+
+.register-main input[type="file"] {
+  position: relative !important;
+  opacity: 1 !important;
+  width: 100% !important;
+  height: auto !important;
+}
+
+.register-main .form-check {
+  display: flex !important;
+  flex-direction: row-reverse;
+  justify-content: end;
+  gap: 35px !important;
+}

@@ -1,0 +1,45 @@
+.income-report {
+  direction: rtl;
+  overflow: scroll;
+}
+
+.income-report::-webkit-scrollbar {
+  display: none;
+}
+
+.income-report-content .income-logo img {
+  width: 100px;
+  height: 100px;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+}
+
+.income-report-content .total-income span {
+  font-size: 18px;
+}
+
+.income-report-content .total-income .income-tax {
+  font-size: 11px;
+}
+
+.income-report-content .income-details-items div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.income-report-content .income-details-items div .after-rival {
+  font-size: 12px;
+}
+
+@media (min-width:768px) {
+  .income-report .table {
+    padding-left: 20%;
+    padding-right: 20%;
+  }
+}

@@ -1,0 +1,97 @@
+:root {
+  --color-black: #000;
+  --color-white: #fff;
+  --color-orange: #F94E30;
+  --color-light-orange: #FF6433;
+  --color-light-gray: #F2F2F2;
+  --color-light: #F4F4F4;
+  --color-whitesmoke: #F5F5F5;
+  --color-dark: #212529;
+  --color-danger: #DC3545;
+  --color-gray: #929292;
+  --font-family-manrope: 'Manrope', sans-serif;
+  --font-family-poppins: 'Poppins', sans-serif;
+  --transition-ease: all 300ms ease-in-out;
+}
+
+.bocket-main {
+  display: flex;
+  flex-direction: column;
+  background: rgb(255, 255, 255) !important;
+  height: 100%;
+  padding: 10px;
+  overflow-y: scroll;
+}
+
+.bocket-main::-webkit-scrollbar {
+  display: none
+}
+
+.loading,
+.error {
+  text-align: center;
+  color: #888;
+}
+
+.balance {
+  font-size: 2em;
+  color: #4caf50;
+  margin-bottom: 20px;
+}
+
+.transactions {
+  list-style-type: none;
+  padding: 0;
+}
+
+.transaction-item {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.transaction-item:last-child {
+  border-bottom: none;
+}
+
+.transaction-description {
+  font-weight: bold;
+}
+
+.transaction-amount {
+  color: #ff5722;
+}
+
+.bocket-main h1,
+.bocket-main h2,
+.bocket-main h3 {
+  color: #333;
+}
+
+.bocket-main section {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  direction: rtl;
+}
+
+/**/
+.recharge-button {
+  background-color: #4CAF50;
+  /* Green background */
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.recharge-button:hover {
+  background-color: #45a049;
+  /* Darker green on hover */
+}

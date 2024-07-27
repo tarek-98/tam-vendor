@@ -155,3 +155,11 @@
   justify-content: end;
   align-items: center;
 }
+
+.message-date {
+  text-align: center;
+  font-size: 12px;
+  margin: 10px 0;
+  font-weight: bold;
+  color: #666;
+}

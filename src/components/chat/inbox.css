@@ -152,7 +152,7 @@
   margin-top: 1px;
   margin-right: auto;
   display: flex;
-  justify-content: end;
+  justify-content: start;
   align-items: center;
 }
 

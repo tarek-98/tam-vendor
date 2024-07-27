@@ -144,3 +144,14 @@
   background-color: #007bff;
   color: #fff;
 }
+
+.message-time {
+  display: block;
+  font-size: 0.7em;
+  color: #999;
+  margin-top: 1px;
+  margin-right: auto;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}

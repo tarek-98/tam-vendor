@@ -191,14 +191,16 @@ function EditProduct() {
   }
 
   // Grouping by namechoose
-  const groupedChooses = product.chooses.reduce((acc, choose) => {
-    const { namechoose } = choose;
-    if (!acc[namechoose]) {
-      acc[namechoose] = [];
-    }
-    acc[namechoose].push(choose);
-    return acc;
-  }, {});
+  const groupedChooses =
+    product &&
+    product.chooses.reduce((acc, choose) => {
+      const { namechoose } = choose;
+      if (!acc[namechoose]) {
+        acc[namechoose] = [];
+      }
+      acc[namechoose].push(choose);
+      return acc;
+    }, {});
   useEffect(() => {
     console.log(product);
   }, []);
@@ -632,46 +634,49 @@ function EditProduct() {
                           </label>
                           <div className="d-flex justify-content-start gap-5">
                             <Row>
-                              {Object.entries(groupedChooses).map(
-                                ([namechoose, items]) => (
-                                  <div key={namechoose}>
-                                    <div
-                                      className="size-change d-flex flex-column"
-                                      key={namechoose}
-                                    >
-                                      <h5>{namechoose}</h5>
-                                      {items.map(
-                                        ({
-                                          _id,
-                                          pricetypechoose,
-                                          pricechoose,
-                                          img,
-                                          color,
-                                        }) => (
-                                          <Col lg="12">
-                                            <ul>
-                                              <li className="mb-2">{color}</li>
-                                              <li className="mb-2">
-                                                {pricechoose}
-                                              </li>
-                                              <li className="mb-2">
-                                                {pricetypechoose}
-                                              </li>
-                                              <li className="mb-2">
-                                                <img
-                                                  src={img}
-                                                  alt=""
-                                                  width="100px"
-                                                />
-                                              </li>
-                                            </ul>
-                                          </Col>
-                                        )
-                                      )}
+                              {product &&
+                                Object.entries(groupedChooses).map(
+                                  ([namechoose, items]) => (
+                                    <div key={namechoose}>
+                                      <div
+                                        className="size-change d-flex flex-column"
+                                        key={namechoose}
+                                      >
+                                        <h5>{namechoose}</h5>
+                                        {items.map(
+                                          ({
+                                            _id,
+                                            pricetypechoose,
+                                            pricechoose,
+                                            img,
+                                            color,
+                                          }) => (
+                                            <Col lg="12">
+                                              <ul>
+                                                <li className="mb-2">
+                                                  {color}
+                                                </li>
+                                                <li className="mb-2">
+                                                  {pricechoose}
+                                                </li>
+                                                <li className="mb-2">
+                                                  {pricetypechoose}
+                                                </li>
+                                                <li className="mb-2">
+                                                  <img
+                                                    src={img}
+                                                    alt=""
+                                                    width="100px"
+                                                  />
+                                                </li>
+                                              </ul>
+                                            </Col>
+                                          )
+                                        )}
+                                      </div>
                                     </div>
-                                  </div>
-                                )
-                              )}
+                                  )
+                                )}
                             </Row>
                           </div>
                         </div>

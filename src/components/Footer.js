@@ -19,11 +19,15 @@ function Footer() {
   const [terms, setTerms] = useState(false);
   const [info, setInfo] = useState(false);
 
+  const [toggle, setToggle] = useState(0);
+
   return (
     <div className="footer">
       <div>
         <footer className="footer-container">
-          <div className="tab-container">
+          <div
+            className={toggle === 0 ? "tab-container active" : "tab-container"}
+          >
             <Link
               to={
                 vendorInfo &&
@@ -32,19 +36,27 @@ function Footer() {
                   ? "/register-sucssess"
                   : "/"
               }
+              onClick={() => setToggle(0)}
               className="tab-link"
             >
               <FaHome className="tab-icon" />
               <div className="tab-text">الرئيسية</div>
             </Link>
           </div>
-          <div className="tab-container pop foot-pc">
+          <div
+            className={
+              toggle === 1
+                ? "tab-container active pop foot-pc"
+                : "tab-container pop foot-pc"
+            }
+          >
             <Link
               to={
                 isAuthenticated && vendorInfo.data.status === "accepted"
                   ? "/profile/chat"
                   : "/login"
               }
+              onClick={() => setToggle(1)}
               className="tab-link"
             >
               <MdOutlineMoveToInbox className="tab-icon" />
@@ -56,22 +68,32 @@ function Footer() {
               <div className="tab-text"> الوارد</div>
             </Link>
           </div>
-          <div className="tab-container foot-pc">
+          <div
+            className={
+              toggle === 2
+                ? "tab-container active foot-pc"
+                : "tab-container foot-pc"
+            }
+          >
             <Link
               to={
                 isAuthenticated && vendorInfo.data.status === "accepted"
                   ? "/profile/addProduct"
                   : "/login"
               }
+              onClick={() => setToggle(2)}
               className="tab-link"
             >
               <AiFillPlusSquare className="tab-icon" />
               <div className="tab-text">اضافة منتج</div>
             </Link>
           </div>
-          <div className="tab-container">
+          <div
+            className={toggle === 3 ? "tab-container active" : "tab-container"}
+          >
             <Link
               to={isAuthenticated ? "/profile" : "/login"}
+              onClick={() => setToggle(3)}
               className="tab-link"
             >
               <FaRegUserCircle className="tab-icon" />

@@ -18,10 +18,10 @@ function AddProduct() {
   const navigate = useNavigate();
   const { vendorInfo } = useSelector((state) => state.auth);
   const { newProduct, status } = useSelector((state) => state.addProduct);
-  const id = vendorInfo.data._id;
+  const id = vendorInfo && vendorInfo.data._id;
   const productId =
-    status === "succeeded" || status === "chooseAdded"
-      ? newProduct.data._id
+    status === "product Added" || status === "chooseAdded"
+      ? newProduct && newProduct.data._id
       : null;
   const [validated, setValidated] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
@@ -178,12 +178,6 @@ function AddProduct() {
       icon: "info",
     });
   }
-
-  useEffect(() => {
-    if (status == "product Added") {
-      navigate("/profile/productslist");
-    }
-  }, [status]);
 
   return (
     <div className="user-profile">
@@ -468,7 +462,7 @@ function AddProduct() {
                             <input
                               type="checkbox"
                               name="typeWarranty"
-                              value="return"
+                              value="returnMoney"
                               onChange={handleChange}
                               id="option1"
                             />
@@ -478,7 +472,7 @@ function AddProduct() {
                             <input
                               type="checkbox"
                               name="typeWarranty"
-                              value="return"
+                              value="fix"
                               onChange={handleChange}
                               id="option2"
                             />
@@ -488,7 +482,7 @@ function AddProduct() {
                             <input
                               type="checkbox"
                               name="typeWarranty"
-                              value="return"
+                              value="replacement"
                               onChange={handleChange}
                               id="option3"
                             />

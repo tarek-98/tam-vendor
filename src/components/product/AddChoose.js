@@ -14,7 +14,7 @@ function AddChoose({ productId, optionsMenu }) {
     pricetypechoose: "",
     price: "",
     pricechoose: "",
-    color: "",
+    typeOfChoose: "",
     img: null,
   };
 
@@ -83,15 +83,15 @@ function AddChoose({ productId, optionsMenu }) {
             />
           </div>
           <div className="form-group mb-4">
-            <label htmlFor="color" className="form-label fs-4">
+            <label htmlFor="typeOfChoose" className="form-label fs-4">
               الخيار
             </label>
             <input
               type="text"
-              name="color"
-              value={formDataChoose.color}
+              name="typeOfChoose"
+              value={formDataChoose.typeOfChoose}
               className="form-control"
-              id="color"
+              id="typeOfChoose"
               onChange={handleChangeChoose}
             />
           </div>

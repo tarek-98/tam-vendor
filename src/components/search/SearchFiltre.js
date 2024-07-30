@@ -130,7 +130,7 @@ function SearchFiltre() {
                       <div className="position-relative">
                         <video
                           id="VideoPlayer"
-                          src={vid}
+                          src={product && product.video}
                           className="video-player"
                           autoPlay={false}
                           muted={true}
@@ -138,14 +138,13 @@ function SearchFiltre() {
                           playsInline={true}
                         ></video>
                         <div className="filterItem-price position-absolute">
-                          <div className="free-shopping">
-                            <MdLocalShipping className="text-white fs-6" />
-                            <span className="free-shipping">شحن مجاني</span>
-                          </div>
                           <span className="price-dir">
-                            <span className="ms-1">{product.unit_price}</span>
+                            <span className="ms-1">
+                              {product && product.price}
+                            </span>
                             <span>ر.س</span>
                           </span>
+                          <p className="mb-0 text-white">{product.name}</p>
                         </div>
                       </div>
                     </div>

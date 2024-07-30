@@ -55,7 +55,7 @@ function SlideOverlay({
                 }}
               >
                 <HiMiniBars3 />
-                <span>Info</span>
+                <span>معلومات</span>
               </div>
             </div>
           </div>

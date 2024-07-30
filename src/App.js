@@ -40,23 +40,23 @@ function App() {
     (state) => state.auth
   );
 
-  // if (vendorInfo.data.status === "pending" && isAuthenticated) {
-  //   return (
-  //     <div id="App" className="">
-  //       <div className="home-page">
-  //         <div className="page-container">
-  //           <BrowserRouter>
-  //             <Footer />
-  //             <div className="main-content">
-  //               <LoginSucess />
-  //             </div>
-  //             <HeadPc />
-  //           </BrowserRouter>
-  //         </div>
-  //       </div>
-  //     </div>
-  //   );
-  // }
+  if (vendorInfo.data.status === "pending" && isAuthenticated) {
+    return (
+      <div id="App" className="">
+        <div className="home-page">
+          <div className="page-container">
+            <BrowserRouter>
+              <Footer />
+              <div className="main-content">
+                <LoginSucess />
+              </div>
+              <HeadPc />
+            </BrowserRouter>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div id="App" className="">
@@ -75,49 +75,109 @@ function App() {
                 <Route path="/verify-email" element={<VerifyEmailPage />} />
                 <Route path="/verifyLogin" element={<VerifyLogin />} />
                 <Route path="/verify-phone" element={<VerifyOtp />} />
-                <Route path="/register-sucssess" element={<LoginSucess />} />
-                <Route path="/product/:id" element={<ProductSingle />} />
-                <Route path="/product/edit/:id" element={<EditProduct />} />
-                <Route path="/search" element={<SearchPage />}></Route>
-                <Route path="/profile" element={<Profile />}></Route>
-                <Route path="/profile/inbox" element={<Inbox />}></Route>
+                <Route
+                  path="/register-sucssess"
+                  element={isAuthenticated ? <LoginSucess /> : <Login />}
+                />
+                <Route
+                  path="/product/:id"
+                  element={isAuthenticated ? <ProductSingle /> : <Login />}
+                />
+                <Route
+                  path="/product/edit/:id"
+                  element={isAuthenticated ? <EditProduct /> : <Login />}
+                />
+                <Route
+                  path="/search"
+                  element={isAuthenticated ? <SearchPage /> : <Login />}
+                ></Route>
+                <Route
+                  path="/profile"
+                  element={isAuthenticated ? <Profile /> : <Login />}
+                ></Route>
+                <Route
+                  path="/profile/inbox"
+                  element={isAuthenticated ? <Inbox /> : <Login />}
+                ></Route>
                 <Route
                   path="/profile/inbox/conversations"
-                  element={<ConversationsPage />}
+                  element={isAuthenticated ? <ConversationsPage /> : <Login />}
                 ></Route>
                 <Route
                   path="/profile/inbox/conversations/chat"
-                  element={<Chat />}
+                  element={isAuthenticated ? <Chat /> : <Login />}
                 ></Route>
-                <Route path="profile/inbox/chat/:id" element={<Chat />}></Route>
-                <Route path="/profile/bocket" element={<Bocket />}></Route>
-                <Route path="/profile/shipping" element={<Shipping />}></Route>
-                <Route path="/profile/payments" element={<Tabby />}></Route>
+                <Route
+                  path="profile/inbox/chat/:id"
+                  element={isAuthenticated ? <Chat /> : <Login />}
+                ></Route>
+                <Route
+                  path="/profile/bocket"
+                  element={isAuthenticated ? <Bocket /> : <Login />}
+                ></Route>
+                <Route
+                  path="/profile/shipping"
+                  element={isAuthenticated ? <Shipping /> : <Login />}
+                ></Route>
+                <Route
+                  path="/profile/payments"
+                  element={isAuthenticated ? <Tabby /> : <Login />}
+                ></Route>
                 <Route
                   path="/profile/notification"
-                  element={<Notifications />}
+                  element={isAuthenticated ? <Notifications /> : <Login />}
                 ></Route>
-                <Route path="/profile/editInfo" element={<EditInfo />} />
-                <Route path="/profile/editlogo" element={<EditLogo />} />
-                <Route path="/profile/address" element={<UserAddress />} />
-                <Route path="/profile/address/add" element={<AddAddress />} />
+                <Route
+                  path="/profile/editInfo"
+                  element={isAuthenticated ? <EditInfo /> : <Login />}
+                />
+                <Route
+                  path="/profile/editlogo"
+                  element={isAuthenticated ? <EditLogo /> : <Login />}
+                />
+                <Route
+                  path="/profile/address"
+                  element={isAuthenticated ? <UserAddress /> : <Login />}
+                />
+                <Route
+                  path="/profile/address/add"
+                  element={isAuthenticated ? <AddAddress /> : <Login />}
+                />
                 <Route
                   path="/profile/address/editAddress/:id"
-                  element={<EditAddress />}
+                  element={isAuthenticated ? <EditAddress /> : <Login />}
                 />
-                <Route path="/profile/addProduct" element={<AddProduct />} />
-                <Route path="/profile/productslist" element={<AllProducts />} />
-                <Route path="/profile/orderslist" element={<OrdersList />} />
-                <Route path="/profile/orderslist/:id" element={<OrderInfo />} />
-                <Route path="/profile/coupons" element={<CouponPage />} />
-                <Route path="/profile/review" element={<ReviewList />} />
+                <Route
+                  path="/profile/addProduct"
+                  element={isAuthenticated ? <AddProduct /> : <Login />}
+                />
+                <Route
+                  path="/profile/productslist"
+                  element={isAuthenticated ? <AllProducts /> : <Login />}
+                />
+                <Route
+                  path="/profile/orderslist"
+                  element={isAuthenticated ? <OrdersList /> : <Login />}
+                />
+                <Route
+                  path="/profile/orderslist/:id"
+                  element={isAuthenticated ? <OrderInfo /> : <Login />}
+                />
+                <Route
+                  path="/profile/coupons"
+                  element={isAuthenticated ? <CouponPage /> : <Login />}
+                />
+                <Route
+                  path="/profile/review"
+                  element={isAuthenticated ? <ReviewList /> : <Login />}
+                />
                 <Route
                   path="/profile/incomereport"
-                  element={<IncomeReport />}
+                  element={isAuthenticated ? <IncomeReport /> : <Login />}
                 />
                 <Route
                   path="/profile/addProduct/added"
-                  element={<AddedSucssess />}
+                  element={isAuthenticated ? <AddedSucssess /> : <Login />}
                 />
               </Routes>
             </div>

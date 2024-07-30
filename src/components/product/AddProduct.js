@@ -179,6 +179,12 @@ function AddProduct() {
     });
   }
 
+  useEffect(() => {
+    if (status == "product Added") {
+      navigate("/profile/productslist");
+    }
+  }, [status]);
+
   return (
     <div className="user-profile">
       <div className="container">

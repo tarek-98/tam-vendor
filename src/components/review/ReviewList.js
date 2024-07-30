@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchReviews } from "../../store/reviewSlice";
-import { Box, Typography } from "@mui/material";
+import { Box, CircularProgress, Typography } from "@mui/material";
 import { Rating } from "@mui/lab";
 import { Col, Row } from "react-bootstrap";
 import "./review.css";
@@ -11,7 +11,7 @@ const ReviewList = () => {
   const dispatch = useDispatch();
   const { reviews, loading, error } = useSelector((state) => state.reviews);
   const { vendorInfo } = useSelector((state) => state.auth);
-  const reviewsData = reviews.data;
+  const reviewsData = reviews && reviews;
   const vendorId = vendorInfo.data._id;
 
   useEffect(() => {
@@ -19,12 +19,20 @@ const ReviewList = () => {
     console.log(vendorInfo.data._id);
   }, []);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading)
+    return (
+      <div className="main-review d-flex align-items-center justify-content-center">
+        <CircularProgress />
+      </div>
+    );
   if (error) return <p>Error: {error}</p>;
 
   return (
     <div className="main-review">
       <div className="container">
+        <div className="main-title text-center mb-4">
+          <h3>تقيماتي</h3>
+        </div>
         <Row>
           {reviewsData &&
             reviewsData.reviews.map((review, index) => (

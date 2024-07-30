@@ -131,7 +131,9 @@ function UserProfile() {
                   <span className="ms-1">{vendorInfo.data.vendorName}</span>
                 </div>
                 <div className="user-ph text-center mb-2">
-                  <span className="text-dark">{vendorInfo.data.status}</span>
+                  <span className="text-dark">
+                    {vendorInfo.data.vendorLocation}
+                  </span>
                 </div>
                 <div className="edit-logo d-flex gap-4 text-center">
                   <Link onClick={toggleModal}>
@@ -425,7 +427,7 @@ function UserProfile() {
                 <span>صندوق الوارد</span>
               </Link>
             </div>
-            <div className="user-option-item inbox-pc">
+            <div className="user-option-item">
               <Link className="user-item d-flex w-100" to="/profile/review">
                 <MdOutlineMoveToInbox className="tab-icon" />
                 <span>تقيماتي</span>

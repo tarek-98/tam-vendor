@@ -33,6 +33,7 @@ import Chat from "./components/chat/Chat";
 import Inbox from "./components/chat/Inbox";
 import ReviewList from "./components/review/ReviewList";
 import EditProduct from "./components/product/EditProduct";
+import ConversationsPage from "./components/chat/ConversationList";
 
 function App() {
   const { isAuthenticated, error, vendorInfo, status } = useSelector(
@@ -80,7 +81,15 @@ function App() {
                 <Route path="/search" element={<SearchPage />}></Route>
                 <Route path="/profile" element={<Profile />}></Route>
                 <Route path="/profile/inbox" element={<Inbox />}></Route>
-                <Route path="/profile/chat" element={<Chat />}></Route>
+                <Route
+                  path="/profile/inbox/conversations"
+                  element={<ConversationsPage />}
+                ></Route>
+                <Route
+                  path="/profile/inbox/conversations/chat"
+                  element={<Chat />}
+                ></Route>
+                <Route path="profile/inbox/chat/:id" element={<Chat />}></Route>
                 <Route path="/profile/bocket" element={<Bocket />}></Route>
                 <Route path="/profile/shipping" element={<Shipping />}></Route>
                 <Route path="/profile/payments" element={<Tabby />}></Route>

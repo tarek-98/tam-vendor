@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { STATUS } from "../utils/status";
 import axios from "axios";
 
-const API_URL = "https://tager.onrender.com";
+const API_URL = "https://tager-dpsl.onrender.com";
 const Authorization = localStorage.getItem("token");
 
 // for getting the products list with limited numbers

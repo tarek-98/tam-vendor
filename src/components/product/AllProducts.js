@@ -121,11 +121,8 @@ function AllProducts() {
   const [pending, setPending] = React.useState(true);
   const [rows, setRows] = React.useState([]);
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      setRows(filteredProducts);
-      setPending(false);
-    }, 1000);
-    return () => clearTimeout(timeout);
+    setRows(filteredProducts);
+    setPending(false);
   }, []);
 
   /*loader*/
@@ -219,9 +216,6 @@ function AllProducts() {
     },
   };
   /* */
-
-  const img_url =
-    "https://gomla-wbs.el-programmer.com/storage/app/public/product";
 
   return (
     <div className="vendor-products pt-5">

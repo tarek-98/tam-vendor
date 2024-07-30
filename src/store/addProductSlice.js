@@ -3,7 +3,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const API_URL = "https://tager.onrender.com";
+const API_URL = "https://tager-dpsl.onrender.com";
 
 export const addProduct = createAsyncThunk(
   "product/addProduct",
@@ -53,7 +53,7 @@ const productSlice = createSlice({
         state.status = "loading";
       })
       .addCase(addProduct.fulfilled, (state, action) => {
-        state.status = "succeeded";
+        state.status = "product Added";
         state.newProduct = action.payload;
       })
       .addCase(addProduct.rejected, (state, action) => {

@@ -90,7 +90,7 @@ function ProductSingle() {
               id={id}
               src={product && product.video}
               className="react-player"
-              autoPlay
+              autoPlay={true}
               muted={sound}
               loop
               playsInline={true}

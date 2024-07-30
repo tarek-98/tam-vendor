@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
-const API_URL = "https://tager.onrender.com";
+const API_URL = "https://tager-dpsl.onrender.com";
 const authorization = localStorage.getItem("token");
 const Authorization = localStorage.getItem("token");
 
@@ -69,11 +70,22 @@ export const fetchFollowers = createAsyncThunk(
 export const fetchSingleVendor = createAsyncThunk(
   "vendors/fetchSingleVendor",
   async (id) => {
-    const res = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`);
+    const res = await fetch(`${API_URL}/admin/vendor/${id}`);
     const data = await res.json();
     return data;
   }
 );
+
+export const delVendor = createAsyncThunk("users/delVendor", async (id) => {
+  const response = await axios.get(`${API_URL}/vendor/vendor/${id}`, {
+    headers: {
+      Authorization: `${Authorization}`,
+      // "Content-Type": "application/json",
+    },
+  });
+  console.log(response.data);
+  return response.data;
+});
 
 export const vendorSlice = createSlice({
   name: "vendorSlice",
@@ -113,13 +125,26 @@ export const vendorSlice = createSlice({
       state.error = action.payload;
       state.status = "failed";
     });
-    builder.addCase(fetchSingleVendor.fulfilled, (state, action) => {
-      state.loading = false;
-      state.status = "succeeded";
-      state.singleVendor = "action.payload";
-    });
+    builder
+      .addCase(fetchSingleVendor.fulfilled, (state, action) => {
+        state.loading = false;
+        state.status = "succeeded";
+        state.singleVendor = "action.payload";
+      })
+
+      .addCase(delVendor.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(delVendor.fulfilled, (state, action) => {
+        state.status = "vendor deleted";
+      })
+      .addCase(delVendor.rejected, (state) => {
+        state.status = "failed";
+        state.error = "failed";
+      });
   },
 });
 
 export const {} = vendorSlice.actions;
+export const getSingleVendor = (state) => state.vendors.singleVendor;
 export default vendorSlice.reducer;

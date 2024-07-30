@@ -6,14 +6,17 @@ import MessageInput from "./MessageInput";
 import { fetchMessagesAsync } from "../../store/chatSlice";
 import "./inbox.css";
 import Swal from "sweetalert2";
+import { useLocation } from "react-router";
 const socket = io("https://tager.onrender.com"); // Replace with your Socket.io server URL
 
 const Chat = () => {
   const dispatch = useDispatch();
   const { vendorInfo } = useSelector((state) => state.auth);
-
-  const receiverId = `6697dc304a2b74d797d9bde3`;
-  const senderId = vendorInfo.data._id;
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const senderId =
+    searchParams.get("senderId") || (vendorInfo && vendorInfo.data._id);
+  const receiverId = searchParams.get("receiverId");
 
   useEffect(() => {
     Swal.fire({

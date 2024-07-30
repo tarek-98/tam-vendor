@@ -67,7 +67,7 @@ const Comments = ({ product }) => {
               رد
             </span>
 
-            {user === comment.client && (
+            {(user === comment.client || user === product.idVendor) && (
               <span
                 onClick={() =>
                   dispatch(
@@ -111,7 +111,8 @@ const Comments = ({ product }) => {
                         رد
                       </span>
 
-                      {user === reply.user && (
+                      {(user === comment.client ||
+                        user === product.idVendor) && (
                         <span
                           onClick={() =>
                             dispatch(

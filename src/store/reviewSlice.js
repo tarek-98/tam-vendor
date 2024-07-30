@@ -2,7 +2,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const API_URL = "https://tager.onrender.com";
+const API_URL = "https://tager-dpsl.onrender.com";
 const Authorization = localStorage.getItem("token");
 
 const initialState = {
@@ -63,7 +63,7 @@ const reviewSlice = createSlice({
       })
       .addCase(fetchReviews.fulfilled, (state, action) => {
         state.loading = false;
-        state.reviews = action.payload;
+        state.reviews = action.payload.data;
       })
       .addCase(fetchReviews.rejected, (state, action) => {
         state.loading = false;

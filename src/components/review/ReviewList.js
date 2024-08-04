@@ -11,7 +11,7 @@ const ReviewList = () => {
   const dispatch = useDispatch();
   const { reviews, loading, error } = useSelector((state) => state.reviews);
   const { vendorInfo } = useSelector((state) => state.auth);
-  const reviewsData = reviews && reviews;
+  const reviewsData = reviews && reviews.data;
   const vendorId = vendorInfo.data._id;
 
   useEffect(() => {
@@ -32,6 +32,10 @@ const ReviewList = () => {
       <div className="container">
         <div className="main-title text-center mb-4">
           <h3>تقيماتي</h3>
+          <div className="vendor-loc fw-bold">
+            <span> متوسط تقييم التاجر : </span>
+            <span>{reviewsData && reviewsData.averageRating}</span>
+          </div>
         </div>
         <Row>
           {reviewsData &&

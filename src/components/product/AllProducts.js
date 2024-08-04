@@ -2,15 +2,18 @@ import React, { useEffect, useState } from "react";
 import "./addProduct.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  delProduct,
   fetchAsyncProducts,
   fetchAsyncProductsByVendors,
   getAllVendorProducts,
 } from "../../store/productSlice";
-import { Button, Table } from "react-bootstrap";
+import { Button, Table, ToastContainer } from "react-bootstrap";
 import DataTable from "react-data-table-component";
 import { MdDeleteForever, MdModeEdit } from "react-icons/md";
 import { MdOutlineSlideshow } from "react-icons/md";
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 function AllProducts() {
   const products = useSelector(getAllVendorProducts);
@@ -49,6 +52,29 @@ function AllProducts() {
       [name]: value,
     }));
   };
+
+  function sweetAlertDel(productId) {
+    Swal.fire({
+      title: "هل انت متأكد؟",
+      text: "هل تريد حذف المنتج",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "نعم حذف",
+      cancelButtonText: "الغاء",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        toast.success("تم حذف المنتج", {
+          position: "top-left",
+        });
+        dispatch(delProduct(productId));
+        setTimeout(() => {
+          dispatch(fetchAsyncProductsByVendors(id));
+        }, 1000);
+      }
+    });
+  }
 
   const columns = [
     {
@@ -102,7 +128,10 @@ function AllProducts() {
             <MdModeEdit className="text-black fs-6" />
           </Link>
           <span className="del" title="حذف">
-            <MdDeleteForever className="text-white fs-6" />
+            <MdDeleteForever
+              className="text-white fs-6"
+              onClick={() => sweetAlertDel(row._id)}
+            />
           </span>
           <Link className="edit me-2" to={`/product/${row._id}`} title="مشاهدة">
             <MdOutlineSlideshow className="text-black fs-6" />
@@ -282,6 +311,7 @@ function AllProducts() {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }

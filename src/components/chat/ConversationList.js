@@ -9,7 +9,6 @@ const ConversationsPage = () => {
 
   const conversations = useSelector(selectConversations);
   const { vendorInfo } = useSelector((state) => state.auth);
-  const receiverId = `6697dc304a2b74d797d9bde3`;
   const vendorId = vendorInfo && vendorInfo.data._id;
 
   useEffect(() => {

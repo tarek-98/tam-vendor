@@ -4,7 +4,12 @@ import { useNavigate } from "react-router";
 import "./login.css";
 import logo from "../../assets/images/logo.jpeg";
 import { Link } from "react-router-dom";
-import { sendLoginCode, setPhone, setEmail } from "../../store/authSlice";
+import {
+  sendLoginCode,
+  setPhone,
+  setEmail,
+  sendCodePhone,
+} from "../../store/authSlice";
 import { ToastContainer, toast } from "react-toastify";
 import LoginSucess from "./LoginSucess";
 
@@ -26,7 +31,7 @@ const Login = () => {
     if (phoneLogin) {
       if (saudiPhoneNumberRegex.test(vendorPhone)) {
         dispatch(setPhone(vendorPhone));
-        dispatch(sendLoginCode(vendorPhone));
+        dispatch(sendCodePhone(vendorPhone));
         navigate("/verify-phone");
       } else {
         toast.error("ادخل رقم جوال صالح", {

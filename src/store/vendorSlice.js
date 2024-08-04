@@ -76,7 +76,7 @@ export const fetchSingleVendor = createAsyncThunk(
   }
 );
 
-export const delVendor = createAsyncThunk("users/delVendor", async (id) => {
+export const delVendor = createAsyncThunk("vendors/delVendor", async (id) => {
   const response = await axios.get(`${API_URL}/vendor/vendor/${id}`, {
     headers: {
       Authorization: `${Authorization}`,
@@ -86,6 +86,28 @@ export const delVendor = createAsyncThunk("users/delVendor", async (id) => {
   console.log(response.data);
   return response.data;
 });
+
+export const editVendorNonPremmision = createAsyncThunk(
+  "vendors/editVendorNonPremmision",
+  async ({ idVendor, vendorName, vendorEmail, vendorPhone }) => {
+    const response = await axios.post(
+      `${API_URL}/vendor/edit-vendor-request-nopermissin/${idVendor}`,
+      {
+        vendorName,
+        vendorEmail,
+        vendorPhone,
+      },
+      {
+        headers: {
+          Authorization: `${Authorization}`,
+          // "Content-Type": "application/json",
+        },
+      }
+    );
+    console.log(response.data);
+    return response.data;
+  }
+);
 
 export const vendorSlice = createSlice({
   name: "vendorSlice",
@@ -129,7 +151,7 @@ export const vendorSlice = createSlice({
       .addCase(fetchSingleVendor.fulfilled, (state, action) => {
         state.loading = false;
         state.status = "succeeded";
-        state.singleVendor = "action.payload";
+        state.singleVendor = action.payload;
       })
 
       .addCase(delVendor.pending, (state) => {
@@ -139,6 +161,17 @@ export const vendorSlice = createSlice({
         state.status = "vendor deleted";
       })
       .addCase(delVendor.rejected, (state) => {
+        state.status = "failed";
+        state.error = "failed";
+      })
+
+      .addCase(editVendorNonPremmision.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(editVendorNonPremmision.fulfilled, (state, action) => {
+        state.status = "edited";
+      })
+      .addCase(editVendorNonPremmision.rejected, (state) => {
         state.status = "failed";
         state.error = "failed";
       });

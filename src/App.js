@@ -40,23 +40,23 @@ function App() {
     (state) => state.auth
   );
 
-  if (vendorInfo.data.status === "pending" && isAuthenticated) {
-    return (
-      <div id="App" className="">
-        <div className="home-page">
-          <div className="page-container">
-            <BrowserRouter>
-              <Footer />
-              <div className="main-content">
-                <LoginSucess />
-              </div>
-              <HeadPc />
-            </BrowserRouter>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  // if (vendorInfo.data.status === "pending" && isAuthenticated) {
+  //   return (
+  //     <div id="App" className="">
+  //       <div className="home-page">
+  //         <div className="page-container">
+  //           <BrowserRouter>
+  //             <Footer />
+  //             <div className="main-content">
+  //               <LoginSucess />
+  //             </div>
+  //             <HeadPc />
+  //           </BrowserRouter>
+  //         </div>
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div id="App" className="">

@@ -6,6 +6,7 @@ import { RiChatForwardLine } from "react-icons/ri";
 import { HiMiniBars3 } from "react-icons/hi2";
 import { Link, useNavigate } from "react-router-dom";
 import { fetchAsyncProductSingle } from "../store/productSlice";
+import logo1 from "../assets/images/logo1.png";
 
 function SlideOverlay({
   product,
@@ -18,10 +19,14 @@ function SlideOverlay({
 }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isAuthenticated, userInfo } = useSelector((state) => state.auth);
+  const { isAuthenticated, userInfo, vendorInfo } = useSelector(
+    (state) => state.auth
+  );
   const productId = product ? product._id : null;
   const userData = userInfo ? userInfo[`Client data`][0] : null;
   const UserId = userData ? userData._id : null;
+  const vendorData = vendorInfo && vendorInfo.data;
+  const logo = vendorData && vendorData.logo;
   const VendorId = product ? product.idVendor : null;
 
   return (
@@ -30,7 +35,13 @@ function SlideOverlay({
         <div className="left-side">
           <div className="left-side-content">
             <div className="vendor-logo">
-              <Link className="vend-in"></Link>
+              <Link className="vend-in">
+                {vendorData && vendorData.logo ? (
+                  <img src={vendorData && vendorData.logo} alt="vendorImage" />
+                ) : (
+                  <img src={logo1} alt="vendorImage" />
+                )}
+              </Link>
             </div>
 
             <div className="smart-wrapper">

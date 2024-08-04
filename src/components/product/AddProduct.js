@@ -12,6 +12,20 @@ import { toast, ToastContainer } from "react-toastify";
 import { addChoose, addProduct } from "../../store/addProductSlice";
 import { Button } from "react-bootstrap";
 import AddChoose from "./AddChoose";
+import {
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Checkbox,
+  ListItemText,
+} from "@mui/material";
+import { styled } from "@mui/system";
+
+const StyledMenuItem = styled(MenuItem)(({ theme, selected }) => ({
+  backgroundColor: selected ? "gray" : "inherit",
+  color: selected ? "black" : "inherit",
+}));
 
 function AddProduct() {
   const dispatch = useDispatch();
@@ -40,7 +54,7 @@ function AddProduct() {
     img: null,
     video: null,
     warranty: "",
-    typeWarranty: "",
+    typeWarranty: [],
     therearechooses: "",
   });
 
@@ -106,12 +120,31 @@ function AddProduct() {
         ...formData,
         [name]: files[0],
       });
+    } else if (name === "typeWarranty") {
+      const selectedOptions = Array.from(
+        e.target.selectedOptions,
+        (option) => option.value
+      );
+      setFormData({
+        ...formData,
+        [name]: selectedOptions,
+      });
     } else {
       setFormData({
         ...formData,
         [name]: value,
       });
     }
+  };
+
+  const handleSelectChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setFormData({
+      ...formData,
+      typeWarranty: typeof value === "string" ? value.split(",") : value,
+    });
   };
 
   function handleSave() {
@@ -139,7 +172,13 @@ function AddProduct() {
     } else {
       const formDataObj = new FormData();
       Object.keys(formData).forEach((key) => {
-        formDataObj.append(key, formData[key]);
+        if (Array.isArray(formData[key])) {
+          formData[key].forEach((value, index) => {
+            formDataObj.append(`${key}[${index}]`, value);
+          });
+        } else {
+          formDataObj.append(key, formData[key]);
+        }
       });
       dispatch(addProduct({ id, productData: formDataObj }));
       event.preventDefault();
@@ -377,6 +416,27 @@ function AddProduct() {
                         </Form.Group>
                         <Form.Group
                           as={Col}
+                          controlId="validationCustom05"
+                          className="d-flex flex-column justify-content-center align-items-start w-100"
+                        >
+                          <Form.Label className="mb-2">
+                            <span className="required ms-2">
+                              <FaStarOfLife />
+                            </span>
+                            المخزون
+                          </Form.Label>
+                          <Form.Control
+                            type="text"
+                            placeholder="اكتب المخزون"
+                            className=""
+                            required
+                          />
+                          <Form.Control.Feedback type="invalid">
+                            ادخل مخزون المنتج
+                          </Form.Control.Feedback>
+                        </Form.Group>
+                        <Form.Group
+                          as={Col}
                           controlId="validationCustom06"
                           className="d-flex flex-column justify-content-center align-items-start w-100"
                         >
@@ -455,38 +515,59 @@ function AddProduct() {
                               : "warranty-options-hide d-none"
                           }
                         >
-                          <div className="d-flex flex-row-reverse gap-2">
-                            <label htmlFor="option1">
-                              ضمان ذهبي استرجاع المبلغ
-                            </label>
-                            <input
-                              type="checkbox"
+                          <FormControl fullWidth margin="normal">
+                            <InputLabel id="typeWarranty-label">
+                              نوع الضمان
+                            </InputLabel>
+                            <Select
+                              labelId="typeWarranty-label"
                               name="typeWarranty"
-                              value="returnMoney"
-                              onChange={handleChange}
-                              id="option1"
-                            />
-                          </div>
-                          <div className="d-flex flex-row-reverse gap-2">
-                            <label htmlFor="option2">ضمان اصلاح العطل</label>
-                            <input
-                              type="checkbox"
-                              name="typeWarranty"
-                              value="fix"
-                              onChange={handleChange}
-                              id="option2"
-                            />
-                          </div>
-                          <div className="d-flex flex-row-reverse gap-2">
-                            <label htmlFor="option3">ضمان استبدال المنتج</label>
-                            <input
-                              type="checkbox"
-                              name="typeWarranty"
-                              value="replacement"
-                              onChange={handleChange}
-                              id="option3"
-                            />
-                          </div>
+                              multiple
+                              value={formData.typeWarranty}
+                              onChange={handleSelectChange}
+                              renderValue={(selected) => selected.join(", ")}
+                            >
+                              <StyledMenuItem
+                                value="return"
+                                selected={formData.typeWarranty.includes(
+                                  "ضمان ذهبي استرجاع المبلغ"
+                                )}
+                              >
+                                <Checkbox
+                                  checked={formData.typeWarranty.includes(
+                                    "return"
+                                  )}
+                                />
+                                <ListItemText primary="ضمان ذهبي استرجاع المبلغ" />
+                              </StyledMenuItem>
+                              <StyledMenuItem
+                                value="replacement"
+                                selected={formData.typeWarranty.includes(
+                                  "ضمان استبدال المنتج"
+                                )}
+                              >
+                                <Checkbox
+                                  checked={formData.typeWarranty.includes(
+                                    "replacement"
+                                  )}
+                                />
+                                <ListItemText primary="ضمان استبدال المنتج" />
+                              </StyledMenuItem>
+                              <StyledMenuItem
+                                value="rapiar"
+                                selected={formData.typeWarranty.includes(
+                                  "ضمان اصلاح العطل"
+                                )}
+                              >
+                                <Checkbox
+                                  checked={formData.typeWarranty.includes(
+                                    "rapiar"
+                                  )}
+                                />
+                                <ListItemText primary="ضمان اصلاح العطل" />
+                              </StyledMenuItem>
+                            </Select>
+                          </FormControl>
                         </div>
                         <div>
                           <p>

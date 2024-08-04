@@ -11,49 +11,29 @@ import logo from "../../assets/images/logo.jpeg";
 import { Link } from "react-router-dom";
 import { IoIosArrowRoundForward } from "react-icons/io";
 import { fetchUsers } from "../../store/usersSlice";
+import { editVendorNonPremmision } from "../../store/vendorSlice";
 
 function EditInfo() {
+  const dispatch = useDispatch();
   const [firstName, setFirstName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
   const { vendorInfo } = useSelector((state) => state.auth);
 
-  const validateForm = () => {
-    if (firstName === "") {
-      toast.error("الاسم مطلوب", {
-        position: "top-left",
-      });
-      return false;
-    } else if (phone === "") {
-      toast.error("رقم الجوال مطلوب", {
-        position: "top-left",
-      });
-      return false;
-    } else if (email === "") {
-      toast.error("الايميل مطلوب", {
-        position: "top-left",
-      });
-      return false;
-    }
-    return true;
-  };
-
-  const formSubmet = (e) => {
+  const formSubmet = async (e) => {
     e.preventDefault();
-    if (validateForm()) {
-      axios({
-        method: "PUT",
-        url: "http://localhost:9000/users/1",
-        data: {
-          ...vendorInfo.data,
-          vendorName: firstName,
-          vendorEmail: email,
-          vendorPhone: phone,
-        },
-      }).then((data) => {
-        navigate("/profile");
-      });
+    try {
+      dispatch(
+        editVendorNonPremmision({
+          idVendor: vendorInfo && vendorInfo.data._id,
+          vendorName: firstName === "" ? vendorInfo.data.vendorName : firstName,
+          vendorEmail: email === "" ? vendorInfo.data.vendorEmail : email,
+          vendorPhone: phone === "" ? vendorInfo.data.vendorPhone : phone,
+        })
+      );
+    } catch (error) {
+      console.error("vendor verification edited:", error);
     }
   };
 
@@ -78,7 +58,7 @@ function EditInfo() {
               <Form.Label>الاسم</Form.Label>
               <Form.Control
                 type="text"
-                placeholder={vendorInfo.data.vendorName}
+                placeholder={vendorInfo && vendorInfo.data.vendorName}
                 onChange={(e) => setFirstName(e.target.value)}
               />
             </Form.Group>
@@ -86,7 +66,7 @@ function EditInfo() {
               <Form.Label>رقم الجوال</Form.Label>
               <Form.Control
                 type="text"
-                placeholder={vendorInfo.data.vendorPhone}
+                placeholder={vendorInfo && vendorInfo.data.vendorPhone}
                 onChange={(e) => setPhone(e.target.value)}
               />
             </Form.Group>
@@ -94,7 +74,7 @@ function EditInfo() {
               <Form.Label>الايميل</Form.Label>
               <Form.Control
                 type="email"
-                placeholder={vendorInfo.data.vendorEmail}
+                placeholder={vendorInfo && vendorInfo.data.vendorEmail}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </Form.Group>

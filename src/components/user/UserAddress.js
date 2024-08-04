@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./userProfile.css";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchUsers } from "../../store/usersSlice";
+import { fetchUserProfile, fetchUsers } from "../../store/usersSlice";
 
 function UserAddress() {
   const users = useSelector((state) => state.users);
@@ -11,7 +11,7 @@ function UserAddress() {
   const id = 1;
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchUsers(id));
+    dispatch(fetchUserProfile(id));
   }, []);
   return (
     <div className="user-profile">

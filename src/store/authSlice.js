@@ -17,6 +17,20 @@ export const sendLoginCode = createAsyncThunk(
   }
 );
 
+export const sendCodePhone = createAsyncThunk(
+  "auth/sendCodePhone",
+  async (PhoneNumber, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(`${API_URL}/vendor/message-otp/`, {
+        PhoneNumber,
+      });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 export const registerUser = createAsyncThunk(
   "auth/registerUser",
   async (userData, { rejectWithValue }) => {
@@ -51,6 +65,7 @@ export const verifyLoginCode = createAsyncThunk(
     }
   }
 );
+
 export const verifyRegisterCode = createAsyncThunk(
   "auth/verifyRegisterCode",
   async ({ code }, { rejectWithValue }) => {

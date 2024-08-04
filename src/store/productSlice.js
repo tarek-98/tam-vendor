@@ -32,11 +32,28 @@ export const fetchAsyncProductSingle = createAsyncThunk(
     return data;
   }
 );
+
+//delete product
+export const delProduct = createAsyncThunk("fetch/delProduct", async (id) => {
+  const response = await axios.delete(
+    `${API_URL}/products/deleteproduct/${id}`,
+    {
+      headers: {
+        Authorization: `${Authorization}`,
+        // "Content-Type": "application/json",
+      },
+    }
+  );
+  console.log(response.data);
+  return response.data;
+});
+
 const initialState = {
   productSingle: [],
   productSingleStatus: STATUS.IDLE,
   vendorProducts: [],
   vendorProductsStatus: STATUS.IDLE,
+  status: "idle",
 };
 
 const productSlice = createSlice({
@@ -69,6 +86,18 @@ const productSlice = createSlice({
 
       .addCase(fetchAsyncProductsByVendors.rejected, (state, action) => {
         state.vendorProductsStatus = STATUS.FAILED;
+      })
+
+      .addCase(delProduct.pending, (state, action) => {
+        state.status = "loading";
+      })
+
+      .addCase(delProduct.fulfilled, (state, action) => {
+        state.status = "deleted";
+      })
+
+      .addCase(delProduct.rejected, (state, action) => {
+        state.status = "failed";
       });
   },
 });

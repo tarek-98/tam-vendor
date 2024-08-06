@@ -14,13 +14,15 @@ function Register() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [validated, setValidated] = useState(false);
-  const { isAuthenticated, error } = useSelector((state) => state.auth);
+  const { isAuthenticated, error, phoneNumberRegister } = useSelector(
+    (state) => state.auth
+  );
   const [formData, setFormData] = useState({
     vendorEmail: "",
     brandName: "",
     vendorName: "",
     vendorLocation: "",
-    vendorPhone: "",
+    vendorPhone: phoneNumberRegister,
     typeOfLicense: "",
     licenseNumber: "",
     LicenseFile: null,
@@ -136,22 +138,6 @@ function Register() {
               </Form.Group>
             </Row>
             <Row className="mb-4 flex-column">
-              <Form.Group as={Col} controlId="validationCustom03">
-                <Form.Label>جوال</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="اكتب رقم الجوال"
-                  required
-                  maxLength="10"
-                  minLength="10"
-                  onChange={handleChange}
-                  name="vendorPhone"
-                  value={formData.vendorPhone}
-                />
-                <Form.Control.Feedback type="invalid">
-                  ادخل رقم الجوال
-                </Form.Control.Feedback>
-              </Form.Group>
               <Form.Group as={Col} controlId="validationCustom04">
                 <Form.Label>الايميل</Form.Label>
                 <InputGroup hasValidation>

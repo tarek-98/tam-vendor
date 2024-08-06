@@ -1,41 +1,42 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { verifySignUpOTP } from "../../store/authSlice";
 import { useNavigate } from "react-router-dom";
-import { setOtp, verifyLoginCode, verifyLoginOTP } from "../../store/authSlice";
-import "./verify.css";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import OtpInput from "react-otp-input";
+import "./ckeck.css";
 
-function VerifyOtp() {
-  const [code, setCode] = useState("");
+const VerifySingupOtp = () => {
+  const [otp, setOtp] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isAuthenticated, vendorPhone, error } = useSelector(
+  const { phoneNumberRegister, isRegisterd } = useSelector(
     (state) => state.auth
   );
 
   useEffect(() => {
-    if (isAuthenticated === true) {
-      navigate("/profile");
+    if (isRegisterd === true) {
+      navigate("/register");
     }
-  }, [isAuthenticated]);
+  }, [isRegisterd]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      dispatch(setOtp(code));
-      dispatch(verifyLoginOTP(code));
+      dispatch(verifySignUpOTP(otp));
     } catch (error) {
       console.error("Email verification failed:", error);
     }
+    console.log(isRegisterd);
   };
+
   return (
     <div className="verify-main">
       <div className="container">
         <h3 className="mb-4">قم بتأكيد رقم الجوال</h3>
         <span className="mb-3">
           تم إرسال كلمة المرور المؤقتة إلى <br />
-          {vendorPhone}
+          {phoneNumberRegister}
         </span>
         <form
           onSubmit={handleSubmit}
@@ -45,8 +46,8 @@ function VerifyOtp() {
             className="justify-content-center"
             containerStyle="justify-content-center mb-3 otp-input"
             shouldAutoFocus={true}
-            value={code}
-            onChange={setCode}
+            value={otp}
+            onChange={setOtp}
             numInputs={4}
             inputType="number"
             renderSeparator={<span>-</span>}
@@ -55,16 +56,11 @@ function VerifyOtp() {
           <button type="submit" className="btn-24">
             <span>تحقق</span>
           </button>
-          {error === "Invalid OTP" ? (
-            <div className=" text-danger">كود خاطئ</div>
-          ) : (
-            ""
-          )}
         </form>
       </div>
       <ToastContainer />
     </div>
   );
-}
+};
 
-export default VerifyOtp;
+export default VerifySingupOtp;

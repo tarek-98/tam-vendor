@@ -5,6 +5,15 @@ const API_URL = "https://tager-dpsl.onrender.com";
 const authorization = localStorage.getItem("token");
 const Authorization = localStorage.getItem("token");
 
+const filterUpdatedFields = (originalData, updatedData) => {
+  return Object.keys(updatedData).reduce((acc, key) => {
+    if (updatedData[key] !== originalData[key]) {
+      acc[key] = updatedData[key];
+    }
+    return acc;
+  }, {});
+};
+
 export const editLogo = createAsyncThunk(
   "vendor/editLogo",
   async ({ id, img }) => {
@@ -89,14 +98,11 @@ export const delVendor = createAsyncThunk("vendors/delVendor", async (id) => {
 
 export const editVendorNonPremmision = createAsyncThunk(
   "vendors/editVendorNonPremmision",
-  async ({ idVendor, vendorName, vendorEmail, vendorPhone }) => {
+  async ({ idVendor, originalData, updatedData }) => {
+    const filteredData = filterUpdatedFields(originalData, updatedData);
     const response = await axios.post(
       `${API_URL}/vendor/edit-vendor-request-nopermissin/${idVendor}`,
-      {
-        vendorName,
-        vendorEmail,
-        vendorPhone,
-      },
+      filteredData,
       {
         headers: {
           Authorization: `${Authorization}`,

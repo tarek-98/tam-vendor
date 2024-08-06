@@ -6,6 +6,7 @@ import { Box, CircularProgress, Typography } from "@mui/material";
 import { Rating } from "@mui/lab";
 import { Col, Row } from "react-bootstrap";
 import "./review.css";
+import ReviewName from "./ReviewName";
 
 const ReviewList = () => {
   const dispatch = useDispatch();
@@ -49,8 +50,9 @@ const ReviewList = () => {
                     border: "1px solid #ccc",
                     borderRadius: 2,
                   }}
+                  textAlign="center"
                 >
-                  {/*<p>{review.name}</p> */}
+                  <ReviewName review={review} />
                   <Rating value={review.rating} readOnly />
                   <Typography variant="body1">{review.reviewText}</Typography>
                 </Box>

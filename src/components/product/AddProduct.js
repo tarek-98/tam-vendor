@@ -9,7 +9,7 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import { toast, ToastContainer } from "react-toastify";
-import { addChoose, addProduct } from "../../store/addProductSlice";
+import { addProduct } from "../../store/addProductSlice";
 import { Button } from "react-bootstrap";
 import AddChoose from "./AddChoose";
 import {
@@ -33,10 +33,18 @@ function AddProduct() {
   const { vendorInfo } = useSelector((state) => state.auth);
   const { newProduct, status } = useSelector((state) => state.addProduct);
   const id = vendorInfo && vendorInfo.data._id;
-  const productId =
-    status === "product Added" || status === "chooseAdded"
-      ? newProduct && newProduct.data._id
-      : null;
+  const [productId, setProductId] = useState();
+  // const productId =
+  //   status === "product Added" || status === "chooseAdded"
+  //     ? newProduct && newProduct.data._id
+  //     : null;
+
+  useEffect(() => {
+    if (status === "product Added" || status === "chooseAdded") {
+      const productIdSave = newProduct && newProduct.data._id;
+      setProductId(productIdSave);
+    }
+  }, [status]);
   const [validated, setValidated] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   const [videoPreview, setVideoPreview] = useState(null);
@@ -151,7 +159,13 @@ function AddProduct() {
     if (validateForm()) {
       const formDataObj = new FormData();
       Object.keys(formData).forEach((key) => {
-        formDataObj.append(key, formData[key]);
+        if (Array.isArray(formData[key])) {
+          formData[key].forEach((value, index) => {
+            formDataObj.append(`${key}[]`, value); // Ensure array values are correctly appended
+          });
+        } else {
+          formDataObj.append(key, formData[key]);
+        }
       });
       dispatch(addProduct({ id, productData: formDataObj }));
       setOptionsMenu(true);
@@ -174,7 +188,7 @@ function AddProduct() {
       Object.keys(formData).forEach((key) => {
         if (Array.isArray(formData[key])) {
           formData[key].forEach((value, index) => {
-            formDataObj.append(`${key}[${index}]`, value);
+            formDataObj.append(`${key}[]`, value); // Ensure array values are correctly appended
           });
         } else {
           formDataObj.append(key, formData[key]);
@@ -530,7 +544,7 @@ function AddProduct() {
                               <StyledMenuItem
                                 value="return"
                                 selected={formData.typeWarranty.includes(
-                                  "ضمان ذهبي استرجاع المبلغ"
+                                  "return"
                                 )}
                               >
                                 <Checkbox
@@ -538,12 +552,12 @@ function AddProduct() {
                                     "return"
                                   )}
                                 />
-                                <ListItemText primary="ضمان ذهبي استرجاع المبلغ" />
+                                <ListItemText primary="return" />
                               </StyledMenuItem>
                               <StyledMenuItem
                                 value="replacement"
                                 selected={formData.typeWarranty.includes(
-                                  "ضمان استبدال المنتج"
+                                  "replacement"
                                 )}
                               >
                                 <Checkbox
@@ -551,12 +565,12 @@ function AddProduct() {
                                     "replacement"
                                   )}
                                 />
-                                <ListItemText primary="ضمان استبدال المنتج" />
+                                <ListItemText primary="replacement" />
                               </StyledMenuItem>
                               <StyledMenuItem
                                 value="rapiar"
                                 selected={formData.typeWarranty.includes(
-                                  "ضمان اصلاح العطل"
+                                  "rapiar"
                                 )}
                               >
                                 <Checkbox
@@ -564,7 +578,7 @@ function AddProduct() {
                                     "rapiar"
                                   )}
                                 />
-                                <ListItemText primary="ضمان اصلاح العطل" />
+                                <ListItemText primary="rapiar" />
                               </StyledMenuItem>
                             </Select>
                           </FormControl>

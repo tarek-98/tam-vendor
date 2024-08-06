@@ -127,11 +127,12 @@ function AllProducts() {
           >
             <MdModeEdit className="text-black fs-6" />
           </Link>
-          <span className="del" title="حذف">
-            <MdDeleteForever
-              className="text-white fs-6"
-              onClick={() => sweetAlertDel(row._id)}
-            />
+          <span
+            className="del"
+            title="حذف"
+            onClick={() => sweetAlertDel(row._id)}
+          >
+            <MdDeleteForever className="text-white fs-6" />
           </span>
           <Link className="edit me-2" to={`/product/${row._id}`} title="مشاهدة">
             <MdOutlineSlideshow className="text-black fs-6" />

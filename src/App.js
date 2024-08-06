@@ -34,6 +34,8 @@ import Inbox from "./components/chat/Inbox";
 import ReviewList from "./components/review/ReviewList";
 import EditProduct from "./components/product/EditProduct";
 import ConversationsPage from "./components/chat/ConversationList";
+import VerifySingupOtp from "./components/login/VerifySingupOtp";
+import RegisterPhone from "./components/login/RegisterPhone";
 
 function App() {
   const { isAuthenticated, error, vendorInfo, status } = useSelector(
@@ -71,10 +73,12 @@ function App() {
                   element={isAuthenticated ? <Home /> : <Login />}
                 ></Route>
                 <Route path="/login" element={<Login />} />
-                <Route path="/addvendor" element={<Register />} />
+                <Route path="/addvendor" element={<RegisterPhone />} />
                 <Route path="/verify-email" element={<VerifyEmailPage />} />
                 <Route path="/verifyLogin" element={<VerifyLogin />} />
                 <Route path="/verify-phone" element={<VerifyOtp />} />
+                <Route path="/verifySingupOtp" element={<VerifySingupOtp />} />
+                <Route path="/register" element={<Register />} />
                 <Route
                   path="/register-sucssess"
                   element={isAuthenticated ? <LoginSucess /> : <Login />}

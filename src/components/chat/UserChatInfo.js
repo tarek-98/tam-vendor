@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import logo1 from "../../assets/images/logo1.png";
 import { fetchUserProfile, selectUserById } from "../../store/usersSlice";
+import ChatIcon from "@mui/icons-material/Chat";
 
 function UserChatInfo({ userId }) {
   // const { singleUser } = useSelector((state) => state.users);
@@ -20,10 +21,9 @@ function UserChatInfo({ userId }) {
       <div className="d-flex flex-column flex-grow-1">
         <div className="d-flex justify-content-between mb-1">
           <span className="conversation-name">
-            <span>
-              {user && user.FirstName} {user && user.LastName}
-            </span>
+            {user && user.FirstName} {user && user.LastName}
           </span>
+          <ChatIcon className="ms-2" />
         </div>
       </div>
     </div>

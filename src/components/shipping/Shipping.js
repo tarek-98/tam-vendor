@@ -201,7 +201,7 @@ function Shipping() {
                     <div className="p-3 price-vendor">
                       <h5 className="mb-3">تكلفة الشحن للتاجر</h5>
                       <div className="d-flex gap-3 align-items-center">
-                        <p className="m-0">27.6 ر.س</p>
+                        <p className="m-0">{com.priceForVendor} ر.س</p>
                         <p className="m-0 info-ship d-flex flex-wrap align-items-center justify-content-center text-black-50">
                           لاول 25 كجم حسب (الوزن الفعلي او الحجمي ايهما اكبر).
                           <span className="ms-2 me-2">

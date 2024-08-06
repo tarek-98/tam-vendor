@@ -25,13 +25,14 @@ const Login = () => {
   );
 
   const saudiPhoneNumberRegex = /^0[0-9]{9}$/;
+  const lastNineDigits = vendorPhone.length === 10 && vendorPhone.slice(-9);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (phoneLogin) {
       if (saudiPhoneNumberRegex.test(vendorPhone)) {
         dispatch(setPhone(vendorPhone));
-        dispatch(sendCodePhone(vendorPhone));
+        dispatch(sendCodePhone(lastNineDigits));
         navigate("/verify-phone");
       } else {
         toast.error("ادخل رقم جوال صالح", {

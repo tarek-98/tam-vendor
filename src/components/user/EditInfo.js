@@ -10,26 +10,48 @@ import "react-toastify/dist/ReactToastify.css";
 import logo from "../../assets/images/logo.jpeg";
 import { Link } from "react-router-dom";
 import { IoIosArrowRoundForward } from "react-icons/io";
-import { fetchUsers } from "../../store/usersSlice";
 import { editVendorNonPremmision } from "../../store/vendorSlice";
 
 function EditInfo() {
   const dispatch = useDispatch();
-  const [firstName, setFirstName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
-  const navigate = useNavigate();
   const { vendorInfo } = useSelector((state) => state.auth);
+  const idVendor = vendorInfo && vendorInfo.data._id;
+
+  const [formData, setFormData] = useState({
+    vendorName: (vendorInfo && vendorInfo.data.vendorName) || "",
+    vendorEmail: (vendorInfo && vendorInfo.data.vendorEmail) || "",
+    vendorPhone: (vendorInfo && vendorInfo.data.vendorPhone) || "",
+  });
+  const originalData = {
+    vendorName: vendorInfo && vendorInfo.data.vendorName,
+    vendorEmail: vendorInfo && vendorInfo.data.vendorEmail,
+    vendorPhone: vendorInfo && vendorInfo.data.vendorPhone,
+  };
+
+  useEffect(() => {
+    setFormData({
+      vendorName: (vendorInfo && vendorInfo.data.vendorName) || "",
+      vendorEmail: (vendorInfo && vendorInfo.data.vendorEmail) || "",
+      vendorPhone: (vendorInfo && vendorInfo.data.vendorPhone) || "",
+    });
+  }, [vendorInfo && vendorInfo]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
 
   const formSubmet = async (e) => {
     e.preventDefault();
     try {
       dispatch(
         editVendorNonPremmision({
-          idVendor: vendorInfo && vendorInfo.data._id,
-          vendorName: firstName === "" ? vendorInfo.data.vendorName : firstName,
-          vendorEmail: email === "" ? vendorInfo.data.vendorEmail : email,
-          vendorPhone: phone === "" ? vendorInfo.data.vendorPhone : phone,
+          idVendor,
+          originalData,
+          updatedData: formData,
         })
       );
     } catch (error) {
@@ -59,7 +81,9 @@ function EditInfo() {
               <Form.Control
                 type="text"
                 placeholder={vendorInfo && vendorInfo.data.vendorName}
-                onChange={(e) => setFirstName(e.target.value)}
+                name="vendorName"
+                value={formData.vendorName}
+                onChange={handleChange}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPhone">
@@ -67,7 +91,9 @@ function EditInfo() {
               <Form.Control
                 type="text"
                 placeholder={vendorInfo && vendorInfo.data.vendorPhone}
-                onChange={(e) => setPhone(e.target.value)}
+                name="vendorPhone"
+                value={formData.vendorPhone}
+                onChange={handleChange}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -75,7 +101,9 @@ function EditInfo() {
               <Form.Control
                 type="email"
                 placeholder={vendorInfo && vendorInfo.data.vendorEmail}
-                onChange={(e) => setEmail(e.target.value)}
+                name="vendorEmail"
+                value={formData.vendorEmail}
+                onChange={handleChange}
               />
             </Form.Group>
             <Button variant="primary" type="submit">

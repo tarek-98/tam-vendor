@@ -21,7 +21,7 @@ export const sendCodePhone = createAsyncThunk(
   "auth/sendCodePhone",
   async (PhoneNumber, { rejectWithValue }) => {
     try {
-      const response = await axios.post(`${API_URL}/vendor/message-otp/`, {
+      const response = await axios.post(`${API_URL}/vendor/message-otp`, {
         PhoneNumber,
       });
       return response.data;
@@ -79,6 +79,36 @@ export const verifyRegisterCode = createAsyncThunk(
     }
   }
 );
+
+// Async thunk to verify singup code
+export const verifySignUpOTP = createAsyncThunk(
+  "auth/verifySignUpOTP",
+  async (otp, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(
+        `${API_URL}/vendor/signup-Phone-validate-code/${otp}`
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+// Async thunk to verify login code
+export const verifyLoginOTP = createAsyncThunk(
+  "auth/verifyLoginOTP",
+  async (otp, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(
+        `${API_URL}/vendor/Phone-validate-code/${otp}`
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 export const logout = createAsyncThunk(
   "auth/logout",
   async ({ rejectWithValue }) => {
@@ -104,6 +134,8 @@ const authSlice = createSlice({
     logoutStatus: "idle",
     vendorInfo: "",
     token: localStorage.getItem("token") || null,
+    isRegisterd: false,
+    phoneNumberRegister: "",
   },
   reducers: {
     setPhone: (state, action) => {
@@ -117,6 +149,12 @@ const authSlice = createSlice({
     },
     setIsAuthenticated: (state, action) => {
       state.isAuthenticated = action.payload;
+    },
+    setIsRegisterd: (state, action) => {
+      state.isRegisterd = action.payload;
+    },
+    setPhoneNumberRegister: (state, action) => {
+      state.phoneNumberRegister = action.payload;
     },
   },
 
@@ -189,11 +227,44 @@ const authSlice = createSlice({
       .addCase(logout.rejected, (state, action) => {
         state.logoutStatus = "failed";
         state.error = action.error.message;
+      })
+
+      .addCase(verifySignUpOTP.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(verifySignUpOTP.fulfilled, (state, action) => {
+        state.status = "otpSucceeded";
+        state.isRegisterd = true;
+        state.isAuthenticated = true;
+        state.vendorInfo = action.payload;
+      })
+      .addCase(verifySignUpOTP.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      })
+
+      .addCase(verifyLoginOTP.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(verifyLoginOTP.fulfilled, (state, action) => {
+        state.status = "otpSucceeded";
+        state.isAuthenticated = true;
+        state.vendorInfo = action.payload;
+      })
+      .addCase(verifyLoginOTP.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
       });
   },
 });
 
 export const isAuthenticated = (state) => state.auth.isAuthenticated;
-export const { setPhone, setOtp, setEmail, setIsAuthenticated } =
-  authSlice.actions;
+export const {
+  setPhone,
+  setOtp,
+  setEmail,
+  setIsAuthenticated,
+  setIsRegisterd,
+  setPhoneNumberRegister,
+} = authSlice.actions;
 export default authSlice.reducer;

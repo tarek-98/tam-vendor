@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addComment } from "../../store/commentSlice";
+import { fetchAsyncProductSingle } from "../../store/productSlice";
 
 const AddComment = ({ product }) => {
   const [comment, setComment] = useState("");
@@ -16,9 +17,9 @@ const AddComment = ({ product }) => {
     if (comment) {
       dispatch(addComment({ productId, client, comment }));
       setComment("");
-      // setTimeout(() => {
-      //   dispatch(fetchAsyncProducts());
-      // }, 1000);
+      setTimeout(() => {
+        dispatch(fetchAsyncProductSingle(product && product._id));
+      }, 1000);
     }
   };
 

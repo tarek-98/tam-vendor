@@ -101,6 +101,11 @@ function AllProducts() {
       sortable: true,
     },
     {
+      name: "المخزون",
+      selector: (row) => row.totalRating,
+      sortable: true,
+    },
+    {
       name: "الحالة",
       selector: (row) => row.status,
       sortable: true,

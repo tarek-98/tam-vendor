@@ -552,7 +552,7 @@ function AddProduct() {
                                     "return"
                                   )}
                                 />
-                                <ListItemText primary="return" />
+                                <ListItemText primary="ضمان استرجاع المنتج" />
                               </StyledMenuItem>
                               <StyledMenuItem
                                 value="replacement"
@@ -565,7 +565,7 @@ function AddProduct() {
                                     "replacement"
                                   )}
                                 />
-                                <ListItemText primary="replacement" />
+                                <ListItemText primary="ضمان استبدال المنتج" />
                               </StyledMenuItem>
                               <StyledMenuItem
                                 value="rapiar"
@@ -578,9 +578,33 @@ function AddProduct() {
                                     "rapiar"
                                   )}
                                 />
-                                <ListItemText primary="rapiar" />
+                                <ListItemText primary="ضمان اصلاح المنتج" />
                               </StyledMenuItem>
                             </Select>
+                            <Form.Group
+                              as={Col}
+                              controlId="validationCustom02"
+                              className="d-flex flex-column justify-content-center align-items-start mt-3"
+                            >
+                              <Form.Label className="mb-2">
+                                <span className="required ms-2">
+                                  <FaStarOfLife />
+                                </span>
+                                مدة الضمان
+                              </Form.Label>
+                              <Form.Control
+                                type="text"
+                                name="warrantyTime"
+                                // value={formData.warrantyTime}
+                                placeholder="ادخل مدة الضمان"
+                                className=""
+                                required
+                                // onChange={handleChange}
+                              />
+                              <Form.Control.Feedback type="invalid">
+                                ادخل مدة الضمان
+                              </Form.Control.Feedback>
+                            </Form.Group>
                           </FormControl>
                         </div>
                         <div>

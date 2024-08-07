@@ -27,6 +27,7 @@ import { FaLocationDot } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
 import logo1 from "../../assets/images/logo1.png";
 import { MdOutlineMoveToInbox } from "react-icons/md";
+import ReviewsIcon from "@mui/icons-material/Reviews";
 import {
   logout,
   registerUser,
@@ -429,7 +430,7 @@ function UserProfile() {
             </div>
             <div className="user-option-item">
               <Link className="user-item d-flex w-100" to="/profile/review">
-                <MdOutlineMoveToInbox className="tab-icon" />
+                <ReviewsIcon className="tab-icon" />
                 <span>تقيماتي</span>
               </Link>
             </div>

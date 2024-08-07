@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addReply } from "../../store/commentSlice";
+import { fetchAsyncProductSingle } from "../../store/productSlice";
 
 const AddReply = ({ commentId, setReplyMode, product }) => {
   const [reply, setReply] = useState("");
   const dispatch = useDispatch();
-  const { userInfo, isAuthenticated } = useSelector((state) => state.auth);
-  const userData = userInfo ? userInfo[`Client data`][0] : null;
+  const { vendorInfo, isAuthenticated } = useSelector((state) => state.auth);
+  const userData = vendorInfo ? vendorInfo.data : null;
   const user = userData ? userData._id : null;
   const productId = product._id;
   const onreplyChanged = (e) => setReply(e.target.value);
@@ -16,6 +17,9 @@ const AddReply = ({ commentId, setReplyMode, product }) => {
       dispatch(addReply({ productId, commentId, user, reply }));
       setReplyMode(null);
       setReply("");
+      setTimeout(() => {
+        dispatch(fetchAsyncProductSingle(product && product._id));
+      }, 1000);
     }
   };
 

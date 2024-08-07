@@ -14,6 +14,8 @@ function IncomeReport() {
     dispatch(fetchPaymentsMethods());
   }, []);
   const enabledPayment = payments.filter((method) => method.enabled);
+  const { vendorInfo } = useSelector((state) => state.auth);
+  const data = vendorInfo && vendorInfo.data;
 
   return (
     <div className="user-profile">
@@ -23,11 +25,15 @@ function IncomeReport() {
             <div className="row">
               <div className="col">
                 <div className="income-report-content text-center">
-                  <div className="income-logo">
-                    <img src={logo1} alt="" />
+                  <div className="income-logo mb-2">
+                    {data && data.logo ? (
+                      <img src={data && data.logo} alt="vendorImage" />
+                    ) : (
+                      <img src={logo1} alt="vendorImage" />
+                    )}
                   </div>
                   <div className="ve-name mb-4">
-                    <h4>ahmed</h4>
+                    <h4>{data && data.vendorName}</h4>
                   </div>
                   <div className="main-title mb-4">
                     <h3>تقارير الدخل</h3>
@@ -40,7 +46,7 @@ function IncomeReport() {
                         (شامل الضريبة)
                       </span>
                     </span>
-                    <span>115 ر.س</span>
+                    <span>0 ر.س</span>
                   </div>
                   <hr />
                   <div className="income-details mb-4">
@@ -49,15 +55,15 @@ function IncomeReport() {
                   <div className="income-details-items">
                     <div>
                       <span>المبيعات</span>
-                      <span>100</span>
+                      <span>0</span>
                     </div>
                     <div>
                       <span>ضريبة القيمة المضافة (15%)</span>
-                      <span>15</span>
+                      <span>0</span>
                     </div>
                     <div>
                       <span>عمولة تمقل</span>
-                      <span>20</span>
+                      <span>0</span>
                     </div>
                     <div>
                       <span>مستحقات تابي و تمارا</span>
@@ -78,7 +84,7 @@ function IncomeReport() {
                           بعد خصم المستحقات
                         </span>
                       </span>
-                      <span>80</span>
+                      <span>0</span>
                     </div>
                   </div>
                 </div>

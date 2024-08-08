@@ -21,6 +21,8 @@ function Footer() {
 
   const [toggle, setToggle] = useState(0);
 
+
+  //  vendorInfo && vendorInfo.data.status === "pending" && isAuthenticated
   return (
     <div className="footer">
       <div>
@@ -30,9 +32,7 @@ function Footer() {
           >
             <Link
               to={
-                vendorInfo &&
-                vendorInfo.data.status === "pending" &&
-                isAuthenticated
+                vendorInfo && vendorInfo.data === "pending" && isAuthenticated
                   ? "/register-sucssess"
                   : "/"
               }

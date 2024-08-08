@@ -235,7 +235,6 @@ const authSlice = createSlice({
       .addCase(verifySignUpOTP.fulfilled, (state, action) => {
         state.status = "otpSucceeded";
         state.isRegisterd = true;
-        state.isAuthenticated = true;
         state.vendorInfo = action.payload;
       })
       .addCase(verifySignUpOTP.rejected, (state, action) => {

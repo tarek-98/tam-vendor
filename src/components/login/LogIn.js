@@ -50,7 +50,8 @@ const Login = () => {
     document.title = "تسجيل الدخول الي حسابك";
   }, []);
 
-  if (vendorInfo && vendorInfo.data.status === "pending" && isAuthenticated) {
+  //vendorInfo.data.status
+  if (vendorInfo && vendorInfo.data === "pending" && isAuthenticated) {
     return <LoginSucess />;
   }
 
